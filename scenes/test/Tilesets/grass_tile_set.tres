@@ -1,9 +1,0 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cfm65iy0r0n1b"]
-
-[ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="1_6ofe2"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d60b3"]
-texture = ExtResource("1_6ofe2")
-
-[resource]
-sources/0 = SubResource("TileSetAtlasSource_d60b3")

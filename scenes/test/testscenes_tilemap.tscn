@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=6 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="TileSet" uid="uid://djrlh38a1u7d8" path="res://scenes/test/Tilesets/game_tile_set.tres" id="1_mgt1k"]
 [ext_resource type="PackedScene" uid="uid://n1re4rqmpby8" path="res://scenes/Player/player.tscn" id="2_573pn"]
+[ext_resource type="Script" uid="uid://ciuyocl7wwryr" path="res://scripts/time/TimeSystem.gd" id="3_rveaa"]
+[ext_resource type="Script" uid="uid://b0g3c4dbc3jrr" path="res://scripts/time/date_time.gd" id="4_po41v"]
+
+[sub_resource type="Resource" id="Resource_a6230"]
+script = ExtResource("4_po41v")
+seconds = 0
+minutes = 0
+hours = 0
+days = 0
+metadata/_custom_type_script = "uid://b0g3c4dbc3jrr"
 
 [node name="TestscenesTilemap" type="Node2D"]
 
@@ -28,3 +38,8 @@ tile_set = ExtResource("1_mgt1k")
 
 [node name="player" parent="." instance=ExtResource("2_573pn")]
 position = Vector2(1343, 1078)
+
+[node name="TimeSystem" type="Node" parent="."]
+script = ExtResource("3_rveaa")
+date_time = SubResource("Resource_a6230")
+metadata/_custom_type_script = "uid://ciuyocl7wwryr"

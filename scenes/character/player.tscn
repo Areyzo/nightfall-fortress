@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmm4ejlrhw183"]
+[gd_scene load_steps=14 format=3 uid="uid://b6oa61qqkjpyl"]
 
+[ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scenes/character/player.gd" id="1_tum32"]
 [ext_resource type="Texture2D" uid="uid://dwde2r1tq7843" path="res://assets/game/Characters/Blue/Pawn_Blue.png" id="1_vt0b6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tum32"]
@@ -94,15 +95,17 @@ radius = 6.0
 [node name="Player" type="CharacterBody2D"]
 light_mask = 1023
 texture_filter = 1
+script = ExtResource("1_tum32")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -7)
-scale = Vector2(0.229167, 0.265625)
+scale = Vector2(1, 1.161)
 sprite_frames = SubResource("SpriteFrames_xub24")
-animation = &"attacking_right"
+animation = &"ideal_front"
 autoplay = "ideal_front"
-frame_progress = 0.983712
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -7)
 shape = SubResource("CircleShape2D_vt0b6")
+
+[node name="Camera2D" type="Camera2D" parent="."]

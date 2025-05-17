@@ -95,11 +95,12 @@ radius = 6.0
 [node name="Player" type="CharacterBody2D"]
 light_mask = 1023
 texture_filter = 1
+scale = Vector2(0.2, 0.2)
 script = ExtResource("1_tum32")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -7)
-scale = Vector2(1, 1.161)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_xub24")
 animation = &"ideal_front"
 autoplay = "ideal_front"
@@ -109,3 +110,4 @@ position = Vector2(1, -7)
 shape = SubResource("CircleShape2D_vt0b6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)

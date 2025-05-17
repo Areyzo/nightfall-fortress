@@ -668,4 +668,4 @@ tile_set = SubResource("TileSet_wctr1")
 
 [node name="Player" parent="." instance=ExtResource("8_enkr4")]
 position = Vector2(370, 214)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(1, 1)

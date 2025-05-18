@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=20 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
 [ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="2_gkm67"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player.tscn" id="8_enkr4"]
 [ext_resource type="PackedScene" uid="uid://bw8odojrxy465" path="res://scenes/inventorygui/inventory_gui.tscn" id="8_t3nim"]
 [ext_resource type="Script" uid="uid://dnbxlqvee80xj" path="res://scenes/inventorygui/canvas_layer.gd" id="9_05xje"]
+[ext_resource type="PackedScene" uid="uid://dgdckalj8r8f" path="res://scenes/inventorygui/toolpanel.tscn" id="11_aov5o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_lufok")
@@ -688,3 +689,17 @@ offset_right = 68.0
 offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="toolpanel" parent="CanvasLayer" instance=ExtResource("11_aov5o")]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -53.0
+offset_right = 85.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0

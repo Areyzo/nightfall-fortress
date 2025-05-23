@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs3sbfs3oq46o"
-path="res://.godot/imported/toolpanel.png-49832a8ba92eb29f206fdf4d12a9cf8d.ctex"
+uid="uid://3pe8v6fsvlo0"
+path="res://.godot/imported/items.png-a120f83479af43b240304e66b510f450.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game/inventory/toolpanel.png"
-dest_files=["res://.godot/imported/toolpanel.png-49832a8ba92eb29f206fdf4d12a9cf8d.ctex"]
+source_file="res://assets/game/itemss/sprites/items.png"
+dest_files=["res://.godot/imported/items.png-a120f83479af43b240304e66b510f450.ctex"]
 
 [params]
 

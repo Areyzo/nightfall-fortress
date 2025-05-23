@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://legd71v65k3n"
-path="res://.godot/imported/inventorySlot.png-84d4aba585e34cbb4e17e45f6c6b27a7.ctex"
+uid="uid://kojb5y321sov"
+path="res://.godot/imported/InventoryRect.png-8ad713804f255e127734ddb3d5a41c0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game/inventory/inventorySlot.png"
-dest_files=["res://.godot/imported/inventorySlot.png-84d4aba585e34cbb4e17e45f6c6b27a7.ctex"]
+source_file="res://assets/game/GUI/inventory/InventoryRect.png"
+dest_files=["res://.godot/imported/InventoryRect.png-8ad713804f255e127734ddb3d5a41c0d.ctex"]
 
 [params]
 

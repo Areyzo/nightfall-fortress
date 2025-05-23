@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgdckalj8r8f"]
 
-[ext_resource type="Texture2D" uid="uid://cs3sbfs3oq46o" path="res://assets/game/inventory/toolpanel.png" id="1_4xb4v"]
+[ext_resource type="Texture2D" uid="uid://cs3sbfs3oq46o" path="res://assets/game/GUI/inventory/toolpanel.png" id="1_4xb4v"]
 [ext_resource type="PackedScene" uid="uid://dfn61xvm0gbug" path="res://scenes/inventorygui/hotbarslot.tscn" id="2_d0s6s"]
 
 [node name="toolpanel" type="NinePatchRect"]

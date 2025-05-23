@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kojb5y321sov"
-path="res://.godot/imported/InventoryRect.png-2869138427789ee7c8b4c2709c0a0fec.ctex"
+uid="uid://cs3sbfs3oq46o"
+path="res://.godot/imported/toolpanel.png-a02c54b9a7f4425094986c93e6985cf6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game/inventory/InventoryRect.png"
-dest_files=["res://.godot/imported/InventoryRect.png-2869138427789ee7c8b4c2709c0a0fec.ctex"]
+source_file="res://assets/game/GUI/inventory/toolpanel.png"
+dest_files=["res://.godot/imported/toolpanel.png-a02c54b9a7f4425094986c93e6985cf6.ctex"]
 
 [params]
 

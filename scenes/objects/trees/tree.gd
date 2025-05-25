@@ -10,7 +10,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if health <= 0:
 		_death()
-		print("death")
 	
 func _death():
 	if health > 0 : return

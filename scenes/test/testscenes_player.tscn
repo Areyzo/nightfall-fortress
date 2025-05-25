@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://beqadkrw81kbx" path="res://assets/game/Objects/Basic_Grass_Biom_things.png" id="5_nj8qy"]
 [ext_resource type="Texture2D" uid="uid://dd4d8xxo60baf" path="res://assets/game/Objects/trees/tree1 (2).png" id="6_tax2q"]
 [ext_resource type="Texture2D" uid="uid://beg3mqjlooew7" path="res://assets/game/Objects/trees/tree (1).png" id="7_o5oh4"]
-[ext_resource type="PackedScene" uid="uid://bmm4ejlrhw183" path="res://scenes/character/player.tscn" id="8_w456v"]
+[ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="8_w456v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_aqxyb")

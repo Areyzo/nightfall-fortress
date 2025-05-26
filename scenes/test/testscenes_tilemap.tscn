@@ -670,7 +670,7 @@ tile_set = SubResource("TileSet_wctr1")
 [node name="trees" type="Node" parent="."]
 
 [node name="tree" parent="trees" instance=ExtResource("8_t3nim")]
-position = Vector2(329, 139)
+position = Vector2(334, 140)
 collision_layer = 1
 collision_mask = 1
 

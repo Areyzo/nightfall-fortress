@@ -762,8 +762,9 @@ position = Vector2(0, 265)
 [node name="Marker2D6" type="Marker2D" parent="EnemySpawner"]
 position = Vector2(640, 360)
 
-[node name="Goblin" parent="EnemySpawner" instance=ExtResource("10_2vhog")]
+[node name="Goblin" parent="EnemySpawner" node_paths=PackedStringArray("target") instance=ExtResource("10_2vhog")]
 script = ExtResource("13_5imy4")
+target = NodePath("../../Player")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="EnemySpawner/Goblin"]
 sprite_frames = SubResource("SpriteFrames_wslhl")

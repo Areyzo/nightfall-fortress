@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=25 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
 [ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="2_gkm67"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cvkd1xndq44bq" path="res://scenes/objects/trees/tree.tscn" id="8_t3nim"]
 [ext_resource type="Script" uid="uid://bqwxjh07bes4f" path="res://time/time_system.gd" id="10_05xje"]
 [ext_resource type="Script" uid="uid://bdov4ggulw3yj" path="res://time/date_time.gd" id="11_aov5o"]
+[ext_resource type="PackedScene" uid="uid://ploigpntfaof" path="res://time/clock_gui.tscn" id="12_wctr1"]
+[ext_resource type="Script" uid="uid://3ojckex6e0x" path="res://time/directional_light_2d.gd" id="13_fbn4n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_lufok")
@@ -656,6 +658,22 @@ hours = 0
 days = 0
 metadata/_custom_type_script = "uid://bdov4ggulw3yj"
 
+[sub_resource type="Resource" id="Resource_c565e"]
+script = ExtResource("11_aov5o")
+seconds = 0
+minutes = 0
+hours = 5
+days = 0
+metadata/_custom_type_script = "uid://bdov4ggulw3yj"
+
+[sub_resource type="Resource" id="Resource_aoqbf"]
+script = ExtResource("11_aov5o")
+seconds = 0
+minutes = 0
+hours = 22
+days = 0
+metadata/_custom_type_script = "uid://bdov4ggulw3yj"
+
 [node name="TestscenesTilemap" type="Node2D"]
 
 [node name="Gametilemap" type="Node2D" parent="."]
@@ -717,4 +735,28 @@ collision_layer = 2
 [node name="TimeSystem" type="Node" parent="."]
 script = ExtResource("10_05xje")
 date_time = SubResource("Resource_wctr1")
-metadata/_custom_type_script = "uid://bqwxjh07bes4f"
+ticks_pr_sec = 120
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="timeGui" parent="CanvasLayer" instance=ExtResource("12_wctr1")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -106.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 74.0
+grow_horizontal = 0
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." node_paths=PackedStringArray("time_system")]
+blend_mode = 2
+script = ExtResource("13_fbn4n")
+day_color = Color(1, 1, 1, 1)
+night_color = Color(0.454902, 0.486275, 1, 1)
+day_start = SubResource("Resource_c565e")
+night_start = SubResource("Resource_aoqbf")
+time_system = NodePath("../TimeSystem")
+
+[connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
+[connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]

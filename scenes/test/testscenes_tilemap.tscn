@@ -654,7 +654,7 @@ sources/6 = SubResource("TileSetAtlasSource_enkr4")
 script = ExtResource("11_aov5o")
 seconds = 0
 minutes = 0
-hours = 0
+hours = 5
 days = 0
 metadata/_custom_type_script = "uid://bdov4ggulw3yj"
 
@@ -662,7 +662,7 @@ metadata/_custom_type_script = "uid://bdov4ggulw3yj"
 script = ExtResource("11_aov5o")
 seconds = 0
 minutes = 0
-hours = 5
+hours = 6
 days = 0
 metadata/_custom_type_script = "uid://bdov4ggulw3yj"
 
@@ -670,7 +670,7 @@ metadata/_custom_type_script = "uid://bdov4ggulw3yj"
 script = ExtResource("11_aov5o")
 seconds = 0
 minutes = 0
-hours = 22
+hours = 19
 days = 0
 metadata/_custom_type_script = "uid://bdov4ggulw3yj"
 

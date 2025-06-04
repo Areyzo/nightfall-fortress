@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=27 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
 [ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="2_gkm67"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bdov4ggulw3yj" path="res://time/date_time.gd" id="11_aov5o"]
 [ext_resource type="PackedScene" uid="uid://ploigpntfaof" path="res://time/clock_gui.tscn" id="12_wctr1"]
 [ext_resource type="Script" uid="uid://3ojckex6e0x" path="res://time/directional_light_2d.gd" id="13_fbn4n"]
+[ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_lufok")
@@ -674,6 +675,11 @@ hours = 19
 days = 0
 metadata/_custom_type_script = "uid://bdov4ggulw3yj"
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c565e"]
+vertices = PackedVector2Array(658, 420, 658, 434.258, 644.578, 433.297, 373, 532, 373, 547.352, 357, 546.359, 850.211, 267, 851.773, 339.781, 804, 338.789, 836.641, 267, -21, 580, -36.8984, 580, -35.8984, 483, 754, -37, -52, 483, -52, -52.0078, 754, -52.9766, 787.57, -20, 803, -20, 803, 187, 819, 187, 819, 252, 804, 371, 771, 371, 786.57, -37, 771, 387, 739, 387, 739, 404, 677, 404, 677, 420, 532, 450.906, 532, 468, 515, 468, 515, 483, 500, 483, 500, 500, 483, 500, 483, 516, 453, 516, 453, 532, 308, 564.203, 308, 580, 261, 580, 261, 595, 196, 595, 196, 612, 100, 612, 100, 629, 43, 629, 43, 612, -4, 612, -4, 595, -21, 595, 357, 563.203, 643.539, 451.906, 835.641, 252)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(14, 15, 16, 13, 12), PackedInt32Array(17, 18, 19), PackedInt32Array(19, 20, 21, 8), PackedInt32Array(17, 8, 22, 23, 13, 24), PackedInt32Array(23, 25, 26, 13), PackedInt32Array(26, 27, 28), PackedInt32Array(28, 29, 0), PackedInt32Array(30, 31, 32), PackedInt32Array(32, 33, 34), PackedInt32Array(34, 35, 36), PackedInt32Array(36, 37, 38), PackedInt32Array(38, 39, 3), PackedInt32Array(40, 41, 42), PackedInt32Array(42, 43, 44), PackedInt32Array(44, 45, 46), PackedInt32Array(46, 47, 48, 49), PackedInt32Array(49, 50, 51, 13), PackedInt32Array(51, 52, 10, 13), PackedInt32Array(5, 53, 40), PackedInt32Array(2, 54, 30), PackedInt32Array(21, 55, 9, 8), PackedInt32Array(5, 40, 42, 44, 46, 49, 13, 3), PackedInt32Array(36, 38, 3, 13, 34), PackedInt32Array(32, 34, 13, 30), PackedInt32Array(2, 30, 13, 0), PackedInt32Array(28, 0, 13), PackedInt32Array(26, 28, 13), PackedInt32Array(8, 17, 19)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-62, -62, 764, -63, 764, -47, 796, -47, 797, -30, 813, -30, 813, 177, 829, 177, 829, 242, 829, 242, 845, 242, 846, 257, 860, 257, 862, 350, 814, 349, 814, 381, 781, 381, 781, 397, 749, 397, 749, 414, 687, 414, 687, 430, 668, 430, 668, 445, 654, 444, 653, 462, 542, 461, 542, 478, 525, 478, 525, 493, 510, 493, 510, 510, 493, 510, 493, 526, 463, 526, 463, 542, 383, 542, 383, 552, 383, 558, 367, 557, 367, 573, 318, 574, 318, 590, 271, 590, 271, 605, 206, 605, 206, 622, 110, 622, 110, 639, 33, 639, 33, 622, -14, 622, -14, 605, -31, 605, -31, 590, -47, 590, -46, 493, -62, 493)])
+
 [node name="TestscenesTilemap" type="Node2D"]
 
 [node name="Gametilemap" type="Node2D" parent="."]
@@ -758,6 +764,13 @@ night_color = Color(0.454902, 0.486275, 1, 1)
 day_start = SubResource("Resource_c565e")
 night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
+
+[node name="Goblin" parent="." instance=ExtResource("14_c565e")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Goblin"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_c565e")
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]

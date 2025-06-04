@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgt30q1c0t68h"
-path="res://.godot/imported/goblin_dead_anim_f0.png-e74580b48eebb67bf762988ca0bf9788.ctex"
+uid="uid://dpj0bd1ba6sm8"
+path="res://.godot/imported/goblin_idle_anim_f0.png-cc2a71224feab4aa8c774f354752785a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/character/enemies/goblin/goblin_dead_anim_f0.png"
-dest_files=["res://.godot/imported/goblin_dead_anim_f0.png-e74580b48eebb67bf762988ca0bf9788.ctex"]
+source_file="res://scenes/character/goblin/goblin_idle_anim_f0.png"
+dest_files=["res://.godot/imported/goblin_idle_anim_f0.png-cc2a71224feab4aa8c774f354752785a.ctex"]
 
 [params]
 

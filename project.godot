@@ -26,6 +26,15 @@ window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 
+[file_customization]
+
+folder_colors={
+"res://Mines/": "red",
+"res://assets/": "green",
+"res://fonts/": "red",
+"res://scenes/": "purple"
+}
+
 [input]
 
 up={

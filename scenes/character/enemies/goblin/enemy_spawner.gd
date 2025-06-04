@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var testscenes_tilemap = get_parent()
-var goblin_scene := preload("res://scenes/character/enemies/goblin.tscn")
+var goblin_scene := preload("res://scenes/character/enemies/goblin/goblin.tscn")
 var spawn_points := []
 
 func _ready():

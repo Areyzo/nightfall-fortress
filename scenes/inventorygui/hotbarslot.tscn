@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfn61xvm0gbug"]
+
+[ext_resource type="Texture2D" uid="uid://legd71v65k3n" path="res://assets/game/GUI/inventory/inventorySlot.png" id="1_jcprw"]
+
+[node name="Panel" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 19.0
+offset_bottom = 19.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.95, 0.95)
+texture = ExtResource("1_jcprw")
+centered = false
+vframes = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Sprite2D"]
+offset_right = 20.0
+offset_bottom = 20.0

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://crao5mcofyyj"]
+
+[ext_resource type="Script" uid="uid://bydxdn3xoai1g" path="res://assets/game/GUI/inventory/scripts/emptyslot.gd" id="1_0vmr2"]
+[ext_resource type="Texture2D" uid="uid://legd71v65k3n" path="res://assets/game/GUI/inventory/inventorySlot.png" id="1_ydovx"]
+[ext_resource type="Texture2D" uid="uid://3pe8v6fsvlo0" path="res://assets/game/itemss/sprites/items.png" id="2_opr1h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vmr2"]
+atlas = ExtResource("2_opr1h")
+region = Rect2(5, 6, 20, 20)
+margin = Rect2(0, 0, 20, 20)
+
+[sub_resource type="FontVariation" id="FontVariation_opr1h"]
+
+[node name="button" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(37, 35)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0vmr2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.8, 1.65)
+texture = ExtResource("1_ydovx")
+centered = false
+vframes = 2
+
+[node name="TextureRect" type="TextureRect" parent="Sprite2D"]
+custom_minimum_size = Vector2(20, 20)
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 25.0
+offset_bottom = 25.0
+texture = SubResource("AtlasTexture_0vmr2")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 18.0
+offset_right = 23.0
+offset_bottom = 41.0
+theme_override_fonts/font = SubResource("FontVariation_opr1h")
+theme_override_font_sizes/font_size = 10
+text = "99"

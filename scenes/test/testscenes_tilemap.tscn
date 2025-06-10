@@ -768,7 +768,6 @@ night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
-collision_layer = 4
 collision_mask = 2
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]

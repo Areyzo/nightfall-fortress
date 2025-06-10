@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0v8ysjvakee2"]
+
+[ext_resource type="Script" uid="uid://dxpuif16x4vi7" path="res://scenes/objects/itemdrop/log.gd" id="1_r1urv"]
+[ext_resource type="Texture2D" uid="uid://bhtk63j0stdsi" path="res://scenes/objects/itemdrop/log.png" id="2_vobio"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1h2yq"]
+size = Vector2(13, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1urv"]
+
+[node name="log" type="StaticBody2D"]
+script = ExtResource("1_r1urv")
+
+[node name="PickupArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(1.5, 5.5)
+shape = SubResource("RectangleShape2D_1h2yq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.46797, 6.37783)
+rotation = -1.55729
+scale = Vector2(0.1, 0.088)
+texture = ExtResource("2_vobio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 5)
+shape = SubResource("RectangleShape2D_r1urv")

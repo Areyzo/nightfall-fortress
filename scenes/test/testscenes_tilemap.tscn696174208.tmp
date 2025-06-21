@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=28 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
 [ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="2_gkm67"]
@@ -14,8 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ploigpntfaof" path="res://time/clock_gui.tscn" id="12_wctr1"]
 [ext_resource type="Script" uid="uid://3ojckex6e0x" path="res://time/directional_light_2d.gd" id="13_fbn4n"]
 [ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
-[ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
-[ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="16_jxchy"]
+[ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/goblin/enemy_spawner.tscn" id="15_aoqbf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_lufok")
@@ -767,37 +766,14 @@ day_start = SubResource("Resource_c565e")
 night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
+[node name="Goblin" parent="." instance=ExtResource("14_c565e")]
 
-[node name="Goblin" parent="." instance=ExtResource("14_c565e")]
-[node name="Goblin" parent="." instance=ExtResource("14_c565e")]
-collision_layer = 4
-collision_mask = 2
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Goblin"]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]
-script = ExtResource("16_jxchy")
-
-[node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
-
-[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2(0, 200)
-
-[node name="SpawnPoint2" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2(600, 0)
-gizmo_extents = 0.0
-
-[node name="Spawnpoint3" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2(400, 0)
-
-[node name="SpawnPoint4" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2(20, 0)
-
-[node name="Timer2" type="Timer" parent="EnemySpawner"]
-wait_time = 5.0
-autostart = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_c565e")
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]
-[connection signal="timeout" from="EnemySpawner/Timer2" to="EnemySpawner" method="_on_timer_2_timeout"]

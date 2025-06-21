@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw735p6gwq0kw"]
+[gd_scene load_steps=9 format=3 uid="uid://dd36v0kcxr1wi"]
 
 [ext_resource type="Texture2D" uid="uid://dyqn6ic756vep" path="res://fonts/HS.png" id="1_7vrkn"]
-[ext_resource type="Script" uid="uid://blt2n2cr7dxh0" path="res://main_menu.gd" id="1_nlkkf"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_nlkkf"]
 [ext_resource type="FontFile" uid="uid://cgr6hmo32ykru" path="res://fonts/DePixelHalbfett.otf" id="2_fu7sn"]
-[ext_resource type="Script" uid="uid://d0np7mr5dtm4r" path="res://play.gd" id="4_qe12f"]
-[ext_resource type="Script" uid="uid://qo00d8mpvf8l" path="res://options.gd" id="5_8qtwp"]
-[ext_resource type="Script" uid="uid://c63lvfepu3pr4" path="res://exit.gd" id="6_dy7ct"]
+[ext_resource type="Script" path="res://play.gd" id="4_qe12f"]
+[ext_resource type="Script" path="res://options.gd" id="5_8qtwp"]
+[ext_resource type="Script" path="res://exit.gd" id="6_dy7ct"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jix8l"]
 texture = ExtResource("1_7vrkn")

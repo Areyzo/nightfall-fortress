@@ -5,15 +5,17 @@ extends CharacterBody2D
 @onready var flip = $flip
 
 const SPEED = 150
-
 var doChop = false
+
+func _ready():
+	# Add player to group so goblins can find it
+	add_to_group("player")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		print_debug("Do chop called")
 		_do_chop()
 		
-
 	var direction = Vector2.ZERO
 	direction.x = Input.get_axis("left", "right")
 	direction.y = Input.get_axis("up", "down")
@@ -24,7 +26,6 @@ func _physics_process(delta):
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 		
 	_set_animation()
-
 	move_and_slide()
 
 func _set_animation():

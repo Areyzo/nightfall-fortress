@@ -2,18 +2,36 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var navigation_agent = $NavigationAgent2D
+@onready var hp_bar = $HpBar
 
 const SPEED = 50
 const DETECTION_RANGE = 400
 const PATH_UPDATE_INTERVAL = 0.3
 
+var max_health = 100
+var health = max_health
 var player: Node2D = null
 var is_chasing = false
 var path_timer = 0.0
 
-func _ready():
-	add_to_group("goblins")
+func take_damage(amount):
+		health -= amount
+		health = clamp(health, 0, max_health)
+		update_health_bar()
+		   
+		if health <= 0:
+			die()
 
+func update_health_bar():
+		hp_bar.value = health
+
+func die():
+	queue_free()
+		
+func _ready():
+	
+	add_to_group("goblins")
+	update_health_bar()
 	# Check if NavigationAgent2D exists
 	if navigation_agent == null:
 		print("Error: NavigationAgent2D not found in goblin scene!")

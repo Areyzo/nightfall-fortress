@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dm8nscln3p57o"]
+[gd_scene load_steps=15 format=3 uid="uid://dm8nscln3p57o"]
 
 [ext_resource type="Script" uid="uid://drkvnbm6c8uah" path="res://scenes/character/goblin/goblin.gd" id="1_2uai2"]
 [ext_resource type="Texture2D" uid="uid://dgt30q1c0t68h" path="res://scenes/character/goblin/goblin_dead_anim_f0.png" id="1_vh8h2"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dasobk16s1fun" path="res://scenes/character/goblin/goblin_run_anim_f1.png" id="7_8ila4"]
 [ext_resource type="Texture2D" uid="uid://dbslbq56e7cnk" path="res://scenes/character/goblin/goblin_run_anim_f2.png" id="8_kgj17"]
 [ext_resource type="Texture2D" uid="uid://hdm4jfrk5gqv" path="res://scenes/character/goblin/goblin_run_anim_f3.png" id="9_vt6v4"]
+[ext_resource type="Texture2D" uid="uid://bm42pjgdoy5xu" path="res://scenes/character/goblin/Hpbar/Frame.png" id="11_qhg88"]
+[ext_resource type="Texture2D" uid="uid://b5tilo3ymjayy" path="res://scenes/character/goblin/Hpbar/100.png" id="12_vmwq5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6jqie"]
 animations = [{
@@ -73,3 +75,15 @@ position = Vector2(1, 3)
 shape = SubResource("RectangleShape2D_cy02o")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="HpBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(20, 20)
+offset_left = -22.0
+offset_top = -20.0
+offset_right = 78.0
+offset_bottom = 80.0
+scale = Vector2(0.4, 0.4)
+step = 50.0
+value = 100.0
+texture_under = ExtResource("11_qhg88")
+texture_progress = ExtResource("12_vmwq5")

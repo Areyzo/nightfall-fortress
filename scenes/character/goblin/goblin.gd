@@ -12,6 +12,8 @@ var is_chasing = false
 var path_timer = 0.0
 
 func _ready():
+	add_to_group("goblins")
+
 	# Check if NavigationAgent2D exists
 	if navigation_agent == null:
 		print("Error: NavigationAgent2D not found in goblin scene!")
@@ -118,6 +120,19 @@ func _physics_process(delta):
 		animated_sprite_2d.play("run")
 	
 	move_and_slide()
+	# Repel nearby goblins
+	for other in get_tree().get_nodes_in_group("goblins"):
+		if other == self:
+			continue
+		if not is_instance_valid(other):
+			continue
+
+		var separation = global_position - other.global_position
+		var distance = separation.length()
+
+		if distance > 0 and distance < 24:  # Adjust based on goblin size
+			velocity += separation.normalized() * ((24 - distance) / 24.0) * 40
+
 
 func update_target_position():
 	if player != null and is_instance_valid(player):

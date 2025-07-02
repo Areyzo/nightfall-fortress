@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://sicuoqg8g45o"]
+[gd_scene load_steps=17 format=3 uid="uid://cgeugay17yf8h"]
 
 [ext_resource type="Script" uid="uid://p43d7gpfydv6" path="res://scripts/portal.gd" id="1_73j2s"]
 [ext_resource type="Texture2D" uid="uid://ckukqs3nmtkwc" path="res://assets/game/Objects/portal.png" id="1_aq8vf"]

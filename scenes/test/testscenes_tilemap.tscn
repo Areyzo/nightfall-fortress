@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
 [ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
 [ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="16_jxchy"]
-[ext_resource type="PackedScene" uid="uid://sicuoqg8g45o" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
+[ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_lufok")
@@ -769,12 +769,8 @@ night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
-<<<<<<< Updated upstream
-collision_layer = 4
-=======
 
 [node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
->>>>>>> Stashed changes
 collision_mask = 2
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]

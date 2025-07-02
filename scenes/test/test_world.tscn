@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://eb4th1iylgdv"]
+[gd_scene load_steps=6 format=3 uid="uid://bos1rp58kj7ba"]
 
 [ext_resource type="Texture2D" uid="uid://wlwcw2xg5ioe" path="res://assets/game/Tilesets/TempoararyTIleset.jpg" id="1_mpk58"]
-[ext_resource type="PackedScene" uid="uid://sicuoqg8g45o" path="res://scenes/test/portal.tscn" id="2_qsf0h"]
+[ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="2_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="3_qsf0h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3yvu"]
@@ -568,6 +568,6 @@ position = Vector2(126, -43)
 scale = Vector2(0.0878906, 0.129412)
 
 [node name="Player" parent="." instance=ExtResource("3_qsf0h")]
-position = Vector2(159, -44)
+position = Vector2(94, -41)
 
 [editable path="Portal/Portal"]

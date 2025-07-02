@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=31 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
 [ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="2_gkm67"]
@@ -7,11 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://beqadkrw81kbx" path="res://assets/game/Objects/Basic_Grass_Biom_things.png" id="5_05xje"]
 [ext_resource type="Texture2D" uid="uid://dd4d8xxo60baf" path="res://assets/game/Objects/trees/tree1 (2).png" id="6_aov5o"]
 [ext_resource type="Texture2D" uid="uid://beg3mqjlooew7" path="res://assets/game/Objects/trees/tree (1).png" id="7_gkm67"]
+[ext_resource type="Script" uid="uid://dvturhy5m3hxv" path="res://scenes/objects/trees/trees.gd" id="8_1rk7v"]
 [ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="8_enkr4"]
 [ext_resource type="PackedScene" uid="uid://cvkd1xndq44bq" path="res://scenes/objects/trees/tree.tscn" id="8_t3nim"]
 [ext_resource type="Script" uid="uid://bqwxjh07bes4f" path="res://time/time_system.gd" id="10_05xje"]
 [ext_resource type="Script" uid="uid://bdov4ggulw3yj" path="res://time/date_time.gd" id="11_aov5o"]
 [ext_resource type="PackedScene" uid="uid://ploigpntfaof" path="res://time/clock_gui.tscn" id="12_wctr1"]
+[ext_resource type="PackedScene" uid="uid://df1vh4n4sjty8" path="res://assets/game/SaveLoad/save_load.tscn" id="13_as6pb"]
 [ext_resource type="Script" uid="uid://3ojckex6e0x" path="res://time/directional_light_2d.gd" id="13_fbn4n"]
 [ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
 [ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
@@ -706,6 +708,7 @@ tile_map_data = PackedByteArray("AAAiAAQABAADAAIAAAAjAAcABAABAAAAAAAjAAgABAABAAE
 tile_set = SubResource("TileSet_wctr1")
 
 [node name="trees" type="Node" parent="."]
+script = ExtResource("8_1rk7v")
 
 [node name="tree9" parent="trees" instance=ExtResource("8_t3nim")]
 position = Vector2(664, 368)
@@ -747,6 +750,10 @@ date_time = SubResource("Resource_wctr1")
 ticks_pr_sec = 120
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SaveLoad" parent="CanvasLayer" instance=ExtResource("13_as6pb")]
+offset_right = 44.0
+offset_bottom = 32.0
 
 [node name="timeGui" parent="CanvasLayer" instance=ExtResource("12_wctr1")]
 anchors_preset = 1

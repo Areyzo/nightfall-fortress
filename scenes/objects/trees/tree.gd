@@ -10,10 +10,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if health <= 0:
 		_death()
-	
+
 func _death():
 	if health > 0 : return
 	animated_sprite_2d.play("death")
+	if get_parent().has_method("get_all_tree_states"):
+		var states = get_parent().get_all_tree_states()
+		print("⚠️ Tree '%s' died. Current all tree states: %s" % [name, states])
+	#add hide func
+	
 	
 func get_hit(playerDirectionX):
 	animated_sprite_2d.flip_h = playerDirectionX == 1
@@ -24,3 +29,6 @@ func get_hit(playerDirectionX):
 func _on_animated_sprite_2d_animation_finished() -> void:
 	animated_sprite_2d.flip_h = false
 	animated_sprite_2d.play("idle")
+	
+func get_state():
+	return "dead"

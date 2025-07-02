@@ -3,14 +3,17 @@ extends CharacterBody2D
 @onready var animated_sprite_2d = $flip/AnimatedSprite2D
 @onready var damage_box = $flip/damagebox
 @onready var flip = $flip
-
+@onready var hp_bar = $HPbar
 const SPEED = 150
 var doChop = false
+var max_health = 100
+var health = max_health
 
 func _ready():
 	# Add player to group so goblins can find it
 	add_to_group("player")
-
+	update_health_bar()
+	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		print_debug("Do chop called")
@@ -71,3 +74,19 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	var frame = animated_sprite_2d.frame
 	if animated_sprite_2d.animation == "chop" && frame == 3:
 		_hit_targets()
+func take_damage(amount):
+	health -= amount
+	health = clamp(health, 0, max_health)
+	update_health_bar()
+	print("Player took damage! Current HP: ", health)
+	
+	if health <= 0:
+		die()
+func update_health_bar():
+	if hp_bar:
+		hp_bar.max_value = max_health
+		hp_bar.value = health
+
+func die():
+	print("Player died!")
+	queue_free()  # or trigger a game over screen

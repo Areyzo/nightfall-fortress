@@ -7,7 +7,13 @@ extends CharacterBody2D
 const SPEED = 50
 const DETECTION_RANGE = 400
 const PATH_UPDATE_INTERVAL = 0.3
+const ATTACK_RANGE = 30
 
+
+const ATTACK_DAMAGE = 5
+const ATTACK_COOLDOWN = 3.0 # seconds
+
+var attack_timer = 0.0
 var max_health = 100
 var health = max_health	
 var player: Node2D = null
@@ -18,6 +24,7 @@ var is_dead = false
 func take_damage(amount):
 		health -= amount
 		health = clamp(health, 0, max_health)
+		print("Player took damage! Current HP: ", health)
 		update_health_bar()
 		   
 		if health <= 0:
@@ -150,6 +157,14 @@ func _physics_process(delta):
 		animated_sprite_2d.play("run")
 	
 	move_and_slide()
+		# After movement logic
+	attack_timer -= delta
+	if is_chasing and attack_timer <= 0 and player != null and is_instance_valid(player):
+		distance_to_player = global_position.distance_to(player.global_position)
+		if distance_to_player <= ATTACK_RANGE:
+			player.take_damage(ATTACK_DAMAGE)
+			attack_timer = ATTACK_COOLDOWN
+
 	# Repel nearby goblins
 	for other in get_tree().get_nodes_in_group("goblins"):
 		if other == self:

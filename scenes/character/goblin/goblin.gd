@@ -9,11 +9,12 @@ const DETECTION_RANGE = 400
 const PATH_UPDATE_INTERVAL = 0.3
 
 var max_health = 100
-var health = max_health
+var health = max_health	
 var player: Node2D = null
 var is_chasing = false
 var path_timer = 0.0
-
+var is_dead = false
+ 
 func take_damage(amount):
 		health -= amount
 		health = clamp(health, 0, max_health)
@@ -26,7 +27,13 @@ func update_health_bar():
 		hp_bar.value = health
 
 func die():
+	
+	is_dead = true
+	animated_sprite_2d.play("death")  # Optional if you have a death anim
+	set_physics_process(false)  # Optional: fully stop physics
 	queue_free()
+
+	
 		
 func _ready():
 	
@@ -78,20 +85,25 @@ func find_player_in_node(node: Node) -> Node2D:
 	return null
 
 func _physics_process(delta):
+	if is_dead:
+		return  # Skip all logic if goblin is dead
+
 	# Try to find player if we haven't found one yet
 	if player == null or !is_instance_valid(player):
-		if path_timer <= 0:  # Only search occasionally to avoid performance issues
+		if path_timer <= 0:
 			var players = get_tree().get_nodes_in_group("player")
 			if players.size() > 0:
 				player = players[0]
 				print("Goblin found player: ", player.name)
-		path_timer = PATH_UPDATE_INTERVAL  # Reset timer
+		path_timer = PATH_UPDATE_INTERVAL
 		
-		# If still no player, just idle
 		if player == null:
 			velocity = Vector2.ZERO
 			animated_sprite_2d.play("idle")
 			return
+	
+	# ... rest of your existing code ...
+
 	
 	path_timer += delta
 	

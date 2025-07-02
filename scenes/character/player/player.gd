@@ -47,14 +47,17 @@ func _do_chop():
 	doChop = true
 	animated_sprite_2d.play("chop")
 
-func _hit_tree():
-	var hasCollision = len(damage_box.get_overlapping_bodies()) > 0
-	if not hasCollision:
+func _hit_targets():
+	var targets = damage_box.get_overlapping_bodies()
+	if targets.size() == 0:
 		return
-	var collisionBody = damage_box.get_overlapping_bodies()[0]
 	
-	if collisionBody in get_tree().get_nodes_in_group("trees"):
-		collisionBody.get_hit(flip.scale.x)
+	for target in targets:
+		if target.is_in_group("trees"):
+			target.get_hit(flip.scale.x)
+		elif target.is_in_group("goblins"):
+			target.take_damage(50)  # Deal 20 damage to goblin
+
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	doChop = false
@@ -67,4 +70,4 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	
 	var frame = animated_sprite_2d.frame
 	if animated_sprite_2d.animation == "chop" && frame == 3:
-		_hit_tree()
+		_hit_targets()

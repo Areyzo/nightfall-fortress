@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 @onready var animated_sprite_2d = $flip/AnimatedSprite2D
 @onready var damage_box = $flip/damagebox
 @onready var flip = $flip

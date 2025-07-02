@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://b6oa61qqkjpyl"]
 
-[ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scenes/character/player/player.gd" id="1_tum32"]
+[ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scripts/player.gd" id="1_tum32"]
 [ext_resource type="Texture2D" uid="uid://dwde2r1tq7843" path="res://assets/game/Characters/Blue/Pawn_Blue.png" id="1_vt0b6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v051h"]
@@ -151,7 +151,7 @@ animations = [{
 size = Vector2(8.33333, 6.66667)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vt0b6"]
-radius = 6.0
+radius = 6.66667
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 1023
@@ -179,7 +179,6 @@ position = Vector2(12.5, 3.33333)
 shape = SubResource("RectangleShape2D_gfavw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.26218e-29, -1.00974e-28)
 shape = SubResource("CircleShape2D_vt0b6")
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=30 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
 [ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="2_gkm67"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
 [ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
 [ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="16_jxchy"]
+[ext_resource type="PackedScene" uid="uid://sicuoqg8g45o" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_lufok")
@@ -739,7 +740,7 @@ position = Vector2(142, 68)
 [node name="Player" parent="." instance=ExtResource("8_enkr4")]
 position = Vector2(370, 214)
 scale = Vector2(1.5, 1.5)
-collision_layer = 2
+collision_mask = 1
 
 [node name="TimeSystem" type="Node" parent="."]
 script = ExtResource("10_05xje")
@@ -768,7 +769,12 @@ night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
+<<<<<<< Updated upstream
 collision_layer = 4
+=======
+
+[node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
+>>>>>>> Stashed changes
 collision_mask = 2
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]
@@ -794,8 +800,24 @@ wait_time = 5.0
 autostart = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-6, -2)
 navigation_polygon = SubResource("NavigationPolygon_c565e")
+
+[node name="Portal" type="Node" parent="."]
+
+[node name="Portal" parent="Portal" instance=ExtResource("17_1rk7v")]
+position = Vector2(236, 282)
+destination_level_tag = "lobby"
+
+[node name="CollisionShape2D" parent="Portal/Portal" index="0"]
+position = Vector2(85.1875, -63.6875)
+
+[node name="AnimatedSprite2D" parent="Portal/Portal" index="1"]
+position = Vector2(86, -62)
+scale = Vector2(0.125, 0.123529)
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]
 [connection signal="timeout" from="EnemySpawner/Timer2" to="EnemySpawner" method="_on_timer_2_timeout"]
+
+[editable path="Portal/Portal"]

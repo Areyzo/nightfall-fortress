@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://beqadkrw81kbx" path="res://assets/game/Objects/Basic_Grass_Biom_things.png" id="5_05xje"]
 [ext_resource type="Texture2D" uid="uid://dd4d8xxo60baf" path="res://assets/game/Objects/trees/tree1 (2).png" id="6_aov5o"]
 [ext_resource type="Texture2D" uid="uid://beg3mqjlooew7" path="res://assets/game/Objects/trees/tree (1).png" id="7_gkm67"]
-[ext_resource type="Script" uid="uid://dvturhy5m3hxv" path="res://scenes/objects/trees/trees.gd" id="8_1rk7v"]
+[ext_resource type="Script" path="res://scenes/objects/trees/trees.gd" id="8_1rk7v"]
 [ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="8_enkr4"]
 [ext_resource type="PackedScene" uid="uid://cvkd1xndq44bq" path="res://scenes/objects/trees/tree.tscn" id="8_t3nim"]
 [ext_resource type="Script" uid="uid://bqwxjh07bes4f" path="res://time/time_system.gd" id="10_05xje"]

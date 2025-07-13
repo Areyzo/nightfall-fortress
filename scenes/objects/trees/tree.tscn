@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvkd1xndq44bq"]
+
+[ext_resource type="Script" uid="uid://b2pdqnqvqqaym" path="res://scenes/objects/trees/tree.gd" id="1_tsjaw"]
+[ext_resource type="Texture2D" uid="uid://hl2hgevgmb2m" path="res://scenes/objects/trees/Tree.png" id="2_ouccj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2fd6"]
+atlas = ExtResource("2_ouccj")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3r6k"]
+atlas = ExtResource("2_ouccj")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c4uq"]
+atlas = ExtResource("2_ouccj")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gum2g"]
+atlas = ExtResource("2_ouccj")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idbbm"]
+atlas = ExtResource("2_ouccj")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gysw"]
+atlas = ExtResource("2_ouccj")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_voiyk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2fd6")
+}],
+"loop": false,
+"name": &"chop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3r6k")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c4uq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gum2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idbbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gysw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tsjaw"]
+size = Vector2(32, 20)
+
+[node name="tree" type="StaticBody2D"]
+scale = Vector2(0.7, 0.7)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_tsjaw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-38, -40)
+sprite_frames = SubResource("SpriteFrames_voiyk")
+animation = &"chop"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(-37, 28)
+shape = SubResource("RectangleShape2D_tsjaw")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

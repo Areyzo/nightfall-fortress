@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3ib1er2m4r37"
-path="res://.godot/imported/axe.png-9c4e80388d32f0b3542b753d25988fc2.ctex"
+uid="uid://sjdtm2inf0cm"
+path="res://.godot/imported/1.png-e849306003f49d473d52911ba87fffa8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Mines/Sunnyside_World_Assets/UI/axe.png"
-dest_files=["res://.godot/imported/axe.png-9c4e80388d32f0b3542b753d25988fc2.ctex"]
+source_file="res://Mines/tileset/1.png"
+dest_files=["res://.godot/imported/1.png-e849306003f49d473d52911ba87fffa8.ctex"]
 
 [params]
 

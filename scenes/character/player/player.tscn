@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://b6oa61qqkjpyl"]
+[gd_scene load_steps=28 format=3 uid="uid://b6oa61qqkjpyl"]
 
-[ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scenes/character/player/player.gd" id="1_tum32"]
+[ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scripts/player.gd" id="1_tum32"]
 [ext_resource type="Texture2D" uid="uid://dwde2r1tq7843" path="res://assets/game/Characters/Blue/Pawn_Blue.png" id="1_vt0b6"]
+[ext_resource type="Resource" uid="uid://bnbaohvbmys6c" path="res://scripts/inventory/playerinventory.tres" id="2_sfcyi"]
 [ext_resource type="Texture2D" uid="uid://bm42pjgdoy5xu" path="res://scenes/character/goblin/Hpbar/Frame.png" id="3_sfcyi"]
 [ext_resource type="Texture2D" uid="uid://b5tilo3ymjayy" path="res://scenes/character/goblin/Hpbar/100.png" id="4_ucfoo"]
 
@@ -161,24 +162,15 @@ texture_filter = 1
 scale = Vector2(0.3, 0.3)
 collision_mask = 3
 script = ExtResource("1_tum32")
-
-[node name="HPbar" type="ProgressBar" parent="."]
-offset_left = 113.333
-offset_top = -93.3333
-offset_right = 117.333
-offset_bottom = -66.3333
-step = 2.0
-value = 100.0
+inventory = ExtResource("2_sfcyi")
 
 [node name="flip" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="flip"]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_xub24")
-animation = &"chop"
+animation = &"idle"
 autoplay = "idle"
-frame = 5
-frame_progress = 0.799194
 
 [node name="damagebox" type="Area2D" parent="flip"]
 collision_layer = 3
@@ -189,17 +181,17 @@ position = Vector2(12.5, 3.33333)
 shape = SubResource("RectangleShape2D_gfavw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.26218e-29, -1.00974e-28)
 shape = SubResource("CircleShape2D_vt0b6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = 113.333
-offset_top = -93.3333
-offset_right = 213.333
-offset_bottom = 6.66667
-step = 2.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+offset_bottom = -30.0
+max_value = 100.0
+value = 100.0
 texture_under = ExtResource("3_sfcyi")
 texture_progress = ExtResource("4_ucfoo")
 

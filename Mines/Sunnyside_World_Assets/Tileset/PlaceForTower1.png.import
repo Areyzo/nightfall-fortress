@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3ib1er2m4r37"
-path="res://.godot/imported/axe.png-9c4e80388d32f0b3542b753d25988fc2.ctex"
+uid="uid://blrgryv5wdiub"
+path="res://.godot/imported/PlaceForTower1.png-7b029d1fc96fc6331a273500ac26647c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Mines/Sunnyside_World_Assets/UI/axe.png"
-dest_files=["res://.godot/imported/axe.png-9c4e80388d32f0b3542b753d25988fc2.ctex"]
+source_file="res://Mines/Sunnyside_World_Assets/Tileset/PlaceForTower1.png"
+dest_files=["res://.godot/imported/PlaceForTower1.png-7b029d1fc96fc6331a273500ac26647c.ctex"]
 
 [params]
 

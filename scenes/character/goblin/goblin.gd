@@ -165,7 +165,7 @@ func _physics_process(delta):
 			player.take_damage(ATTACK_DAMAGE)
 			attack_timer = ATTACK_COOLDOWN
 
-	# Repel nearby goblins
+	# Repel nearby goblinss
 	for other in get_tree().get_nodes_in_group("goblins"):
 		if other == self:
 			continue

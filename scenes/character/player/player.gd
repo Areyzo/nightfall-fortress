@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d = $flip/AnimatedSprite2D
 @onready var damage_box = $flip/damagebox
 @onready var flip = $flip
-@onready var hp_bar = $UI/HPbar
+@onready var hp_bar = $TextureProgressBar
 
 # Movement constants
 const SPEED = 150.0
@@ -21,7 +21,10 @@ signal health_changed(new_health)
 signal player_died
 
 # Inventory system
-@export var inventory : Resource  # This will be set in the scene
+@export var inventory : Inventory  # This will be set in the scene
+
+func get_inventory() -> Inventory:
+	return inventory
 
 # Attack system
 @export var attack_damage = 50
@@ -156,12 +159,15 @@ func respawn(spawn_position: Vector2 = Vector2.ZERO):
 	animated_sprite_2d.play("idle")
 
 # Inventory methods (if you want to use the inventory system)
-func add_item_to_inventory(item):
-	if inventory and inventory.has_method("add_item"):
-		return inventory.add_item(item)
+func add_item_to_inventory(item: InventoryItem) -> bool:
+	if inventory and inventory.has_method("insert"):
+		inventory.insert(item)
+		print("Added item to inventory: ", item.name)
+		return true
+	print("Failed to add item - no inventory system")
 	return false
 
-func remove_item_from_inventory(item):
+func remove_item_from_inventory(item: InventoryItem) -> bool:
 	if inventory and inventory.has_method("remove_item"):
 		return inventory.remove_item(item)
 	return false

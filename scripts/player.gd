@@ -6,13 +6,17 @@ class_name Player
 @onready var damage_box = $flip/damagebox
 @onready var flip = $flip
 @export var  SPEED: int = 150
-@export var maxhealth  =3
+@export var maxhealth: int = 3
 @export var inventory: Inventory
+var current_health: int
 var doChop = false
+
+@onready var health_bar = $TextureProgressBar
 
 
 func _ready() :
-	
+	current_health = maxhealth
+	_update_health_bar()
 	add_to_group("player")
 	
 
@@ -78,3 +82,28 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 
 func get_inventory() -> Inventory:
 	return inventory
+
+func take_damage(damage: int) -> void:
+	current_health -= damage
+	current_health = max(current_health, 0)  # Prevent negative health
+	_update_health_bar()
+	
+	print_debug("Player took " + str(damage) + " damage. Health: " + str(current_health) + "/" + str(maxhealth))
+	
+	if current_health <= 0:
+		_die()
+
+func _update_health_bar() -> void:
+	if health_bar:
+		health_bar.value = (float(current_health) / float(maxhealth)) * 100.0
+
+func _die() -> void:
+	print_debug("Player died!")
+	# Add death logic here (restart level, show game over screen, etc.)
+	get_tree().reload_current_scene()
+
+func heal(amount: int) -> void:
+	current_health += amount
+	current_health = min(current_health, maxhealth)  # Don't exceed max health
+	_update_health_bar()
+	print_debug("Player healed " + str(amount) + " health. Health: " + str(current_health) + "/" + str(maxhealth))

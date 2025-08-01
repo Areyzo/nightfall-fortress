@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b6oa61qqkjpyl"]
+[gd_scene load_steps=27 format=3 uid="uid://b6oa61qqkjpyl"]
 
 [ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scenes/character/player/player.gd" id="1_tum32"]
 [ext_resource type="Texture2D" uid="uid://dwde2r1tq7843" path="res://assets/game/Characters/Blue/Pawn_Blue.png" id="1_vt0b6"]
@@ -186,11 +186,12 @@ shape = SubResource("CircleShape2D_vt0b6")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -50.0
-offset_top = -40.0
-offset_right = 50.0
-offset_bottom = -30.0
-max_value = 100.0
+custom_minimum_size = Vector2(15, 15)
+offset_left = -23.3333
+offset_top = -23.3333
+offset_right = 76.6667
+offset_bottom = 76.6667
+scale = Vector2(0.415965, 0.285964)
 value = 100.0
 texture_under = ExtResource("3_sfcyi")
 texture_progress = ExtResource("4_ucfoo")

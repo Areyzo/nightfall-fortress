@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-NaviagationManager="*res://scripts/NavigationManger.gd"
+NavigationManger="*res://scripts/NavigationManger.gd"
 
 [display]
 

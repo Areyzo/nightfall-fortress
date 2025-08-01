@@ -8,10 +8,10 @@ const SPEED = 50
 const DETECTION_RANGE = 400
 const PATH_UPDATE_INTERVAL = 0.3
 const ATTACK_RANGE = 30
-
-
 const ATTACK_DAMAGE = 5
 const ATTACK_COOLDOWN = 3.0 # seconds
+const REPEL_DISTANCE = 30
+const REPEL_FORCE = 50
 
 var attack_timer = 0.0
 var max_health = 100
@@ -22,29 +22,44 @@ var path_timer = 0.0
 var is_dead = false
  
 func take_damage(amount):
-		health -= amount
-		health = clamp(health, 0, max_health)
-		print("Player took damage! Current HP: ", health)
-		update_health_bar()
-		   
-		if health <= 0:
-			die()
+	health -= amount
+	health = clamp(health, 0, max_health)
+	print("Goblin took ", amount, " damage! Current HP: ", health)
+	update_health_bar()
+	   
+	if health <= 0:
+		die()
 
 func update_health_bar():
 		hp_bar.value = health
 
 func die():
-	
 	is_dead = true
-	animated_sprite_2d.play("death")  # Optional if you have a death anim
-	set_physics_process(false)  # Optional: fully stop physics
+	print("Goblin died!")
+	
+	# Play death animation if available
+	if animated_sprite_2d.sprite_frames.has_animation("death"):
+		animated_sprite_2d.play("death")
+	else:
+		animated_sprite_2d.play("idle")  # Fallback
+	
+	# Stop all movement and AI
+	set_physics_process(false)
+	velocity = Vector2.ZERO
+	
+	# Remove from collision but keep visible briefly
+	set_collision_layer(0)
+	set_collision_mask(0)
+	
+	# Remove after a short delay
+	await get_tree().create_timer(1.0).timeout
 	queue_free()
 
 	
 		
 func _ready():
-	
 	add_to_group("goblins")
+	add_to_group("enemies")  # So player can damage goblins
 	update_health_bar()
 	# Check if NavigationAgent2D exists
 	if navigation_agent == null:
@@ -165,7 +180,10 @@ func _physics_process(delta):
 			player.take_damage(ATTACK_DAMAGE)
 			attack_timer = ATTACK_COOLDOWN
 
-	# Repel nearby goblinss
+	# Repel nearby goblins (prevent stacking and overcrowding)
+	var repel_force = Vector2.ZERO
+	var nearby_goblins = 0
+	
 	for other in get_tree().get_nodes_in_group("goblins"):
 		if other == self:
 			continue
@@ -175,8 +193,19 @@ func _physics_process(delta):
 		var separation = global_position - other.global_position
 		var distance = separation.length()
 
-		if distance > 0 and distance < 24:  # Adjust based on goblin size
-			velocity += separation.normalized() * ((24 - distance) / 24.0) * 40
+		if distance > 0 and distance < 30:  # Repel distance
+			nearby_goblins += 1
+			var push_strength = ((30 - distance) / 30.0) * 50
+			repel_force += separation.normalized() * push_strength
+	
+	# Apply repel force with limits to prevent chaos
+	if repel_force.length() > 0:
+		var max_repel = min(80, repel_force.length())  # Cap the force
+		velocity += repel_force.normalized() * max_repel
+		
+		# Reduce normal movement speed when crowded
+		if nearby_goblins >= 3:
+			velocity *= 0.7  # Slow down in crowds
 
 
 func update_target_position():

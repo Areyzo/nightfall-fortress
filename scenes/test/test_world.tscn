@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://bos1rp58kj7ba"]
+[gd_scene load_steps=6 format=4 uid="uid://bos1rp58kj7ba"]
 
 [ext_resource type="TileSet" uid="uid://dertqu87pmorx" path="res://Mines/tileset/new_tile_set.tres" id="1_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="2_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="3_qsf0h"]
+[ext_resource type="PackedScene" uid="uid://cq82u1xtn0xth" path="res://scenes/character/cave_slime/slime_cave.tscn" id="4_k3yvu"]
+[ext_resource type="Script" uid="uid://c481q72l5tr36" path="res://scenes/character/cave_slime/slime_cave.gd" id="5_70kyo"]
 
 [node name="TestWorld" type="Node2D"]
 position = Vector2(226, 222)
@@ -31,5 +33,9 @@ scale = Vector2(0.0878906, 0.129412)
 [node name="Player" parent="." instance=ExtResource("3_qsf0h")]
 position = Vector2(-140, -186)
 scale = Vector2(1.5, 1.5)
+
+[node name="slime_cave" parent="." instance=ExtResource("4_k3yvu")]
+position = Vector2(329, -185)
+script = ExtResource("5_70kyo")
 
 [editable path="Portal/Portal"]

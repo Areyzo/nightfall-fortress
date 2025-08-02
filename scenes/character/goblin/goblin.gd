@@ -8,7 +8,7 @@ const SPEED = 50
 const DETECTION_RANGE = 400
 const PATH_UPDATE_INTERVAL = 0.3
 const ATTACK_RANGE = 30
-const ATTACK_DAMAGE = 5
+const ATTACK_DAMAGE = 5  # 5 damage per attack with 3 second cooldown
 const ATTACK_COOLDOWN = 3.0 # seconds
 const REPEL_DISTANCE = 30
 const REPEL_FORCE = 50
@@ -113,10 +113,12 @@ func _physics_process(delta):
 	# Try to find player if we haven't found one yet
 	if player == null or !is_instance_valid(player):
 		if path_timer <= 0:
-			var players = get_tree().get_nodes_in_group("player")
-			if players.size() > 0:
-				player = players[0]
-				print("Goblin found player: ", player.name)
+			# Check if we're still in the tree before trying to access other nodes
+			if get_tree() != null:
+				var players = get_tree().get_nodes_in_group("player")
+				if players.size() > 0:
+					player = players[0]
+					print("Goblin found player: ", player.name)
 		path_timer = PATH_UPDATE_INTERVAL
 		
 		if player == null:
@@ -183,6 +185,10 @@ func _physics_process(delta):
 	# Repel nearby goblins (prevent stacking and overcrowding)
 	var repel_force = Vector2.ZERO
 	var nearby_goblins = 0
+	
+	# Check if we're still in the tree before trying to access other nodes
+	if get_tree() == null:
+		return
 	
 	for other in get_tree().get_nodes_in_group("goblins"):
 		if other == self:

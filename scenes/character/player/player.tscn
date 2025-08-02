@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://b6oa61qqkjpyl"]
 
-[ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scenes/character/player/player.gd" id="1_tum32"]
+[ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scripts/player.gd" id="1_tum32"]
 [ext_resource type="Texture2D" uid="uid://dwde2r1tq7843" path="res://assets/game/Characters/Blue/Pawn_Blue.png" id="1_vt0b6"]
 [ext_resource type="Resource" uid="uid://bnbaohvbmys6c" path="res://scripts/inventory/playerinventory.tres" id="2_sfcyi"]
 [ext_resource type="Texture2D" uid="uid://bm42pjgdoy5xu" path="res://scenes/character/goblin/Hpbar/Frame.png" id="3_sfcyi"]
@@ -151,7 +151,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfavw"]
-size = Vector2(8.33333, 6.66667)
+size = Vector2(21.6667, 33.3333)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vt0b6"]
 radius = 6.0
@@ -177,7 +177,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flip/damagebox"]
-position = Vector2(12.5, 3.33333)
+position = Vector2(19.1667, -3.33333)
 shape = SubResource("RectangleShape2D_gfavw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

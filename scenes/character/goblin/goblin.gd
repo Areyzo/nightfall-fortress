@@ -7,13 +7,12 @@ extends CharacterBody2D
 const SPEED = 50
 const DETECTION_RANGE = 400
 const PATH_UPDATE_INTERVAL = 0.3
-const ATTACK_RANGE = 30
-const ATTACK_DAMAGE = 5  # 5 damage per attack with 3 second cooldown
+const ATTACK_DAMAGE = 5  # 5 damage per collision with player
 const ATTACK_COOLDOWN = 3.0 # seconds
 const REPEL_DISTANCE = 30
 const REPEL_FORCE = 50
 
-var attack_timer = 0.0
+var attack_timer = 0.0  # Collision damage cooldown
 var max_health = 100
 var health = max_health	
 var player: Node2D = null
@@ -165,22 +164,41 @@ func _physics_process(delta):
 		var direction = (next_path_position - global_position).normalized()
 		velocity = direction * SPEED
 		
-		# Flip sprite based on movement direction
+		# Play directional run animations instead of flipping sprite
 		if direction.x < -0.1:
-			scale.x = -abs(scale.x)  # Face left
+			animated_sprite_2d.play("leftrun")  # Face left
 		elif direction.x > 0.1:
-			scale.x = abs(scale.x)   # Face right
-		
-		animated_sprite_2d.play("run")
+			animated_sprite_2d.play("rightrun")  # Face right
+		else:
+			animated_sprite_2d.play("run")  # Fallback if no left/right animations
 	
 	move_and_slide()
-		# After movement logic
+	
+	# Collision-based damage - simple and immediate like slimes
 	attack_timer -= delta
-	if is_chasing and attack_timer <= 0 and player != null and is_instance_valid(player):
-		distance_to_player = global_position.distance_to(player.global_position)
-		if distance_to_player <= ATTACK_RANGE:
-			player.take_damage(ATTACK_DAMAGE)
-			attack_timer = ATTACK_COOLDOWN
+	if attack_timer <= 0:
+		# Check collision with player through slide collisions
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			var collider = collision.get_collider()
+			if collider != null and collider.is_in_group("player"):
+				print("Goblin collision with player! Damage: ", ATTACK_DAMAGE)
+				collider.take_damage(ATTACK_DAMAGE)
+				attack_timer = ATTACK_COOLDOWN
+				break
+		
+		# Fallback: Check proximity for touching
+		if attack_timer <= 0:  # Only if we didn't already damage
+			if get_tree() != null:
+				var players = get_tree().get_nodes_in_group("player")
+				for player_node in players:
+					if player_node != null and is_instance_valid(player_node):
+						var distance = global_position.distance_to(player_node.global_position)
+						if distance <= 25:  # Close enough to be "touching"
+							print("Goblin touching player! Damage: ", ATTACK_DAMAGE, " Distance: ", distance)
+							player_node.take_damage(ATTACK_DAMAGE)
+							attack_timer = ATTACK_COOLDOWN
+							break
 
 	# Repel nearby goblins (prevent stacking and overcrowding)
 	var repel_force = Vector2.ZERO

@@ -140,6 +140,8 @@ animations = [{
 radius = 9.0
 
 [node name="slime_diagonal" type="Path2D"]
+light_mask = 2
+visibility_layer = 2
 curve = SubResource("Curve2D_rj5fu")
 script = ExtResource("1_yjilu")
 

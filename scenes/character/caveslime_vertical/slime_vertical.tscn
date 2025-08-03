@@ -140,6 +140,8 @@ animations = [{
 radius = 7.07107
 
 [node name="slime_vertical" type="Path2D"]
+light_mask = 2
+visibility_layer = 2
 curve = SubResource("Curve2D_ya6b3")
 script = ExtResource("1_kln7y")
 
@@ -159,5 +161,4 @@ sprite_frames = SubResource("SpriteFrames_noqfy")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D"]
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_xtfog")

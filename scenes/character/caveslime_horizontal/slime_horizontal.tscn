@@ -487,6 +487,8 @@ animations = [{
 radius = 8.0
 
 [node name="SlimeHorizontal" type="Path2D"]
+light_mask = 2
+visibility_layer = 2
 curve = SubResource("Curve2D_wl7qw")
 script = ExtResource("1_adh8s")
 

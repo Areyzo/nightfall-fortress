@@ -50,7 +50,7 @@ func die():
 	is_dead = true
 	print("Horizontal Slime died!")
 	
-	# Stop all movement and AI immediately
+	# Stop all movement and AI immediately	
 	set_physics_process(false)
 	velocity = Vector2.ZERO
 	

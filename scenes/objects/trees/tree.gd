@@ -7,7 +7,7 @@ var health = 3
 func _ready() -> void:
 	add_to_group("trees")
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if health <= 0:
 		_death()
 	

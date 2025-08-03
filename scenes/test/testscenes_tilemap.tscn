@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=38 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
 [ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="16_jxchy"]
 [ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
+[ext_resource type="PackedScene" uid="uid://c1s67g6go710w" path="res://scenes/Buildings/building_system.tscn" id="23_qfnnp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3ft6"]
 texture = ExtResource("1_lufok")
@@ -765,6 +766,8 @@ script = ExtResource("10_05xje")
 date_time = SubResource("Resource_wctr1")
 ticks_pr_sec = 120
 
+[node name="Buildings" type="Node2D" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
 script = ExtResource("13_4kcic")
@@ -792,6 +795,9 @@ offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Building system" parent="CanvasLayer" instance=ExtResource("23_qfnnp")]
+visibility_layer = 513
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." node_paths=PackedStringArray("time_system")]
 blend_mode = 2
 script = ExtResource("13_fbn4n")
@@ -804,7 +810,6 @@ time_system = NodePath("../TimeSystem")
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
 
 [node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
-collision_mask = 2
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]
 script = ExtResource("16_jxchy")

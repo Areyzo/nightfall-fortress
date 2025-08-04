@@ -804,7 +804,6 @@ time_system = NodePath("../TimeSystem")
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
 
 [node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
-collision_mask = 2
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]
 script = ExtResource("16_jxchy")

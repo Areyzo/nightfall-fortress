@@ -31,7 +31,7 @@ func _physics_process(delta):
 	direction.x = Input.get_axis("left", "right")
 	direction.y = Input.get_axis("up", "down")
 	if direction:
-		velocity = direction * SPEED
+		velocity = direction.normalized() * SPEED  # Fixed: added .normalized()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.y = move_toward(velocity.y, 0, SPEED)

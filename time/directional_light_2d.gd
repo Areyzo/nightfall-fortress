@@ -9,7 +9,8 @@ extends DirectionalLight2D
 var in_transition: bool = false
 
 enum DayState{DAY,NIGHT}
-var current_state:DayState =DayState.DAY
+
+var current_state:DayState = DayState.DAY
 
 @onready var time_map : Dictionary = {
 	DayState.DAY:day_start,
@@ -23,6 +24,7 @@ var current_state:DayState =DayState.DAY
 	DayState.DAY:day_color,
 	DayState.NIGHT:night_color,
 }
+
 func _ready() -> void:
 	var diff_day_start = time_system.date_time.diff_without_days(day_start)
 	var diff_night_start = time_system.date_time.diff_without_days(night_start)

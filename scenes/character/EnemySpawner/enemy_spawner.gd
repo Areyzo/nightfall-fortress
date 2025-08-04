@@ -33,6 +33,7 @@ func _on_timer_2_timeout() -> void:
 		return
 	
 	# Pick a random spawn point
+	
 	var spawn_point = spawn_points.pick_random()
 	var goblin = goblin_scene.instantiate()
 	goblin.global_position = spawn_point.global_position

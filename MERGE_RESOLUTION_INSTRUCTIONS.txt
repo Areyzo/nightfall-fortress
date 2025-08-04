@@ -1,0 +1,32 @@
+MERGE CONFLICT RESOLUTION INSTRUCTIONS
+======================================
+
+Please run these commands manually in your terminal to resolve the merge conflicts:
+
+1. Navigate to your project directory:
+   cd "d:\Nightfall-fortress\nightfall-fortress"
+
+2. Check current git status:
+   git status
+
+3. Remove the old exit.gd files from the root:
+   del exit.gd
+   del exit.gd.uid
+
+4. Add all resolved files to git:
+   git add .
+
+5. Check status again:
+   git status
+
+6. Complete the merge:
+   git commit -m "Resolve merge conflicts - unified script paths and resolved player scene conflicts"
+
+WHAT WAS FIXED:
+===============
+✅ player.tscn - Removed duplicate content and merged HP bar + inventory features
+✅ main_menu.tscn - Fixed script path inconsistency (moved exit.gd to scripts folder)
+✅ Import files - Resolved UID conflicts in axe.png.import and 1.png.import
+✅ File organization - All scripts now consistently in scripts/ folder
+
+The conflicts have been resolved in the files, but git still needs to be told that the conflicts are resolved by adding the files and committing.

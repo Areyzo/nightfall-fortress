@@ -1,8 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://b6oa61qqkjpyl"]
+[gd_scene load_steps=27 format=3 uid="uid://b6oa61qqkjpyl"]
 
 [ext_resource type="Script" uid="uid://dv10bfbm7dhas" path="res://scripts/player.gd" id="1_tum32"]
 [ext_resource type="Texture2D" uid="uid://dwde2r1tq7843" path="res://assets/game/Characters/Blue/Pawn_Blue.png" id="1_vt0b6"]
 [ext_resource type="Resource" uid="uid://bnbaohvbmys6c" path="res://scripts/inventory/playerinventory.tres" id="2_sfcyi"]
+[ext_resource type="Texture2D" uid="uid://bm42pjgdoy5xu" path="res://scenes/character/goblin/Hpbar/Frame.png" id="3_sfcyi"]
+[ext_resource type="Texture2D" uid="uid://b5tilo3ymjayy" path="res://scenes/character/goblin/Hpbar/100.png" id="4_ucfoo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v051h"]
 atlas = ExtResource("1_vt0b6")
@@ -149,10 +151,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfavw"]
-size = Vector2(8.33333, 6.66667)
+size = Vector2(21.6667, 33.3333)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vt0b6"]
-radius = 6.66667
+radius = 6.0
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 1023
@@ -167,23 +169,32 @@ inventory = ExtResource("2_sfcyi")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="flip"]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_xub24")
-animation = &"chop"
+animation = &"idle"
 autoplay = "idle"
-frame = 5
-frame_progress = 0.799194
 
 [node name="damagebox" type="Area2D" parent="flip"]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flip/damagebox"]
-position = Vector2(12.5, 3.33333)
+position = Vector2(19.1667, -3.33333)
 shape = SubResource("RectangleShape2D_gfavw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vt0b6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(15, 15)
+offset_left = -23.3333
+offset_top = -23.3333
+offset_right = 76.6667
+offset_bottom = 76.6667
+scale = Vector2(0.415965, 0.285964)
+value = 100.0
+texture_under = ExtResource("3_sfcyi")
+texture_progress = ExtResource("4_ucfoo")
 
 [connection signal="animation_finished" from="flip/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="flip/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

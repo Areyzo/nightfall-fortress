@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cgr6hmo32ykru" path="res://fonts/DePixelHalbfett.otf" id="2_fu7sn"]
 [ext_resource type="Script" uid="uid://bed05geu684a4" path="res://scripts/play.gd" id="4_qe12f"]
 [ext_resource type="Script" uid="uid://bouiy7ldnrrbx" path="res://scripts/options.gd" id="5_8qtwp"]
-[ext_resource type="Script" uid="uid://c63lvfepu3pr4" path="res://exit.gd" id="6_dy7ct"]
+[ext_resource type="Script" uid="uid://c63lvfepu3pr4" path="res://scripts/exit.gd" id="6_dy7ct"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jix8l"]
 texture = ExtResource("1_7vrkn")

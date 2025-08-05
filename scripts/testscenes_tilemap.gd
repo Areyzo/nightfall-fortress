@@ -4,16 +4,50 @@ extends Node2D
 @onready var canvaslayer=$CanvasLayer
 @onready var esc_menu = $CanvasLayer/EscMenu
 
+var game_over_screen = null
 var is_esc_menu_open = false
 var should_load_save = false
+var player_spawn_position = Vector2(640, 360)  # Default spawn position
 
 func _ready():
 	if esc_menu:
 		esc_menu.hide()
 		
+	# Initialize game over screen - find it manually to avoid @onready issues
+	game_over_screen = get_node_or_null("CanvasLayer/GameOverScreen")
+	if game_over_screen:
+		print("Game over screen found and initialized")
+		game_over_screen.hide()
+		game_over_screen.connect("respawn_requested", _on_respawn_requested)
+	else:
+		print("ERROR: Game over screen not found! Trying alternative paths...")
+		# Try to find it in different ways
+		var canvas = get_node_or_null("CanvasLayer")
+		if canvas:
+			print("CanvasLayer found, children: ")
+			for child in canvas.get_children():
+				print("  - ", child.name)
+				if child.name == "GameOverScreen":
+					game_over_screen = child
+					print("Found GameOverScreen as child!")
+					game_over_screen.hide()
+					game_over_screen.connect("respawn_requested", _on_respawn_requested)
+					break
+		
 	# Connect to player death signal if available
 	if player and player.has_signal("player_died"):
+		print("Connected to player death signal")
 		player.connect("player_died", _on_player_died)
+	else:
+		print("ERROR: Player not found or doesn't have player_died signal")
+		print("Player: ", player)
+		if player:
+			print("Player signals: ", player.get_signal_list())
+		
+	# Store initial player position as spawn point
+	if player:
+		player_spawn_position = player.global_position
+		print("Player spawn position set to: ", player_spawn_position)
 	
 	# Check if we should load a saved game
 	# We'll check this directly instead of using GlobalData for now
@@ -112,6 +146,21 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_B:
 			toggle_building_menu()
+		# Debug: Press K key to test player death/game over screen
+		elif event.keycode == KEY_K:
+			print("=== K KEY PRESSED - TESTING PLAYER DEATH ===")
+			if player and player.has_method("take_damage"):
+				print("Player found, current health: ", player.current_health if "current_health" in player else "unknown")
+				print("Max health: ", player.max_health if "max_health" in player else "unknown")
+				print("Debug: Forcing player death for testing...")
+				player.take_damage(player.max_health)  # Deal maximum damage to kill player
+				print("Damage dealt, waiting for death signal...")
+			else:
+				print("ERROR: Player not found or doesn't have take_damage method")
+		# Debug: Press G key to directly test game over screen
+		elif event.keycode == KEY_G:
+			print("=== G KEY PRESSED - DIRECTLY TESTING GAME OVER SCREEN ===")
+			_on_player_died()
 
 func toggle_esc_menu():
 	if is_esc_menu_open:
@@ -206,11 +255,80 @@ func join():
 	MultiplayerManager.join_as_player()
 
 func _on_player_died():
-	"""Handle player death - clear any saved inventory data"""
-	print("Player died! Clearing saved inventory data...")
+	"""Handle player death - show game over screen and clear inventory"""
+	print("=== PLAYER DIED EVENT TRIGGERED ===")
+	print("Game over screen reference: ", game_over_screen)
+	print("Current tree paused state: ", get_tree().paused)
+	
+	# Clear the player's inventory immediately
+	if player and player.inventory:
+		print("Clearing player inventory...")
+		for slot in player.inventory.slots:
+			if slot:
+				slot.item = null
+				slot.amount = 0
+		player.inventory.updated.emit()
+		print("Player inventory cleared!")
 	
 	# Delete the save file so the player starts fresh
 	if FileAccess.file_exists("user://savegame.json"):
 		DirAccess.remove_absolute("user://savegame.json")
 		print("Save file deleted - player will start with empty inventory on respawn")
+	
+	# Show the game over screen
+	if game_over_screen:
+		print("Calling show_game_over() on game over screen...")
+		print("Game over screen visibility before: ", game_over_screen.visible)
+		game_over_screen.show_game_over()
+		print("show_game_over() called!")
+		print("Game over screen visibility after: ", game_over_screen.visible)
+		print("Tree paused state after show_game_over: ", get_tree().paused)
+		print("Game over screen should now be visible")
+	else:
+		print("ERROR: game_over_screen is null!")
+		# Try to find it manually
+		var canvas_layer = get_node_or_null("CanvasLayer")
+		if canvas_layer:
+			var game_over = canvas_layer.get_node_or_null("GameOverScreen")
+			if game_over:
+				print("Found game over screen manually, showing it...")
+				game_over.show_game_over()
+			else:
+				print("Game over screen not found in CanvasLayer children")
+		else:
+			print("CanvasLayer not found")
+
+func _on_respawn_requested():
+	"""Handle respawn button pressed"""
+	print("=== RESPAWN REQUESTED FUNCTION CALLED ===")
+	print("Respawn requested! Respawning player...")
+	
+	# Make sure inventory stays empty - clear it again just to be sure
+	if player and player.inventory:
+		print("Ensuring inventory stays empty after respawn...")
+		for slot in player.inventory.slots:
+			if slot:
+				slot.item = null
+				slot.amount = 0
+		player.inventory.updated.emit()
+		print("Inventory confirmed empty!")
+	
+	# Reset player to spawn position and restore health
+	if player:
+		# Use the player's respawn method if available
+		if player.has_method("respawn"):
+			print("Calling player.respawn() with position: ", player_spawn_position)
+			player.respawn(player_spawn_position)
+		else:
+			# Fallback: manually reset position and health
+			print("Using fallback respawn method")
+			player.global_position = player_spawn_position
+			if player.has_method("reset_health"):
+				player.reset_health()
+			elif "health" in player and "max_health" in player:
+				player.health = player.max_health
+				if player.has_signal("health_changed"):
+					player.health_changed.emit()
+	
+	print("Player respawned successfully with empty inventory!")
 	

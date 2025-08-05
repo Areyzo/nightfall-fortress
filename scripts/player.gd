@@ -181,7 +181,7 @@ func _die() -> void:
 	clear_inventory()
 	
 	# Add death logic here (restart level, show game over screen, etc.)
-	get_tree().reload_current_scene()
+	get_tree().get_root().get_node("Main/CanvasLayer/GameOverScreen")
 
 func clear_inventory() -> void:
 	"""Clear all items from the player's inventory"""

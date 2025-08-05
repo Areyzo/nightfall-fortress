@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=59 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_eyte7"]
 [ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
 [ext_resource type="PackedScene" uid="uid://dd374xusb3il3" path="res://scenes/npc.tscn" id="34_eyte7"]
+[ext_resource type="PackedScene" uid="uid://bdjhg7l0r4xyv" path="res://scenes/ui/game_over_screen.tscn" id="35_game_over"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")
@@ -2726,6 +2727,8 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("35_game_over")]
+
 [node name="EscMenu" type="Control" parent="CanvasLayer"]
 visible = false
 layout_mode = 3
@@ -2887,6 +2890,7 @@ position = Vector2(2161, 232)
 [connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]
 [connection signal="pressed" from="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer/Host" to="." method="host"]
 [connection signal="pressed" from="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer/Join" to="." method="join"]
+[connection signal="respawn_requested" from="CanvasLayer/GameOverScreen" to="." method="_on_respawn_requested"]
 [connection signal="pressed" from="CanvasLayer/EscMenu/MenuPanel/VBoxContainer/ContinueButton" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="CanvasLayer/EscMenu/MenuPanel/VBoxContainer/SaveAndExitButton" to="." method="_on_save_and_exit_pressed"]
 [connection signal="timeout" from="EnemySpawner/Timer2" to="EnemySpawner" method="_on_timer_2_timeout"]

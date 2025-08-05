@@ -140,16 +140,26 @@ func update_health_bar():
 		hp_bar.value = current_health
 
 func die():
-	print("Player died!")
+	print("=== PLAYER DIE FUNCTION CALLED ===")
+	print("Current health: ", current_health)
+	print("About to emit player_died signal...")
 	player_died.emit()
+	print("player_died signal emitted!")
 	# Add death animation/effect here
 	# For now, just disable the player
 	set_physics_process(false)
+	print("Physics process disabled")
+	print("Player die() function complete")
 	# You might want to transition to game over scene instead
 	# get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
 
 func respawn(spawn_position: Vector2 = Vector2.ZERO):
 	"""Respawn the player at given position with full health"""
+	print("=== PLAYER RESPAWN FUNCTION CALLED ===")
+	print("Spawn position: ", spawn_position)
+	print("Current position: ", global_position)
+	print("Current health: ", current_health)
+	
 	global_position = spawn_position
 	current_health = max_health
 	health_changed.emit(current_health)
@@ -157,6 +167,8 @@ func respawn(spawn_position: Vector2 = Vector2.ZERO):
 	is_attacking = false
 	attack_cooldown = 0
 	animated_sprite_2d.play("idle")
+	
+	print("Player respawned at: ", global_position, " with health: ", current_health)
 
 # Inventory methods (if you want to use the inventory system)
 func add_item_to_inventory(item: InventoryItem) -> bool:

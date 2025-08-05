@@ -9,4 +9,3 @@ func _process(delta: float) -> void:
 	if date_time != null:
 		date_time.increase_by_sec(delta * ticks_pr_sec)
 		updated.emit(date_time)
-	

@@ -3,8 +3,9 @@ extends Area2D
 @export var destination_level_tag: String
 
 func _ready():
-	# Connect the body_entered signal
-	connect("body_entered", _on_body_entered)
+	# Check if signal is already connected before connecting
+	if not body_entered.is_connected(_on_body_entered):
+		connect("body_entered", _on_body_entered)
 	print("Portal ready with destination: ", destination_level_tag)
 
 func _on_body_entered(body: Node2D) -> void:

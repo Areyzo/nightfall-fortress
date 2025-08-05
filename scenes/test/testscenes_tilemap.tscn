@@ -1,41 +1,41 @@
-[gd_scene load_steps=57 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=57 format=4 uid="uid://dlwww43vlh116"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
 [ext_resource type="Texture2D" uid="uid://5uwxtqxxwbka" path="res://assets/game/Tilesets/Grass.png" id="2_gkm67"]
-[ext_resource type="Texture2D" uid="uid://dmdlsk64p0uxq" path="res://assets/additional assets/tileset.2/TilesetFloor.png" id="2_yumbo"]
-[ext_resource type="Texture2D" uid="uid://bicga02nhbwl8" path="res://assets/additional assets/tileset.2/TilesetHouse.png" id="3_7fe6k"]
+[ext_resource type="Texture2D" uid="uid://dmdlsk64p0uxq" path="res://assets/additional assets/tileset.2/TilesetFloor.png" id="2_wslhl"]
 [ext_resource type="Texture2D" uid="uid://hohq82vfgqk8" path="res://assets/game/Tilesets/Tilled_Dirt.png" id="3_enkr4"]
-[ext_resource type="Texture2D" uid="uid://dcpcfvjgm0rr7" path="res://assets/additional assets/tileset.2/TilesetField.png" id="4_8qfww"]
+[ext_resource type="Texture2D" uid="uid://dcpcfvjgm0rr7" path="res://assets/additional assets/tileset.2/TilesetField.png" id="3_eyte7"]
+[ext_resource type="Texture2D" uid="uid://brabbpnwtolhn" path="res://assets/additional assets/tileset.2/TilesetWater.png" id="4_kymrb"]
 [ext_resource type="Texture2D" uid="uid://b8jcr5dxxy8py" path="res://assets/game/Tilesets/Tilled_Dirt_Wide.png" id="4_t3nim"]
 [ext_resource type="Texture2D" uid="uid://beqadkrw81kbx" path="res://assets/game/Objects/Basic_Grass_Biom_things.png" id="5_05xje"]
-[ext_resource type="Texture2D" uid="uid://q1gf1eaxsflg" path="res://assets/additional assets/tileset.2/TilesetDesert.png" id="5_wslhl"]
+[ext_resource type="Texture2D" uid="uid://b3n45kxxmf0qr" path="res://assets/additional assets/tileset.2/TilesetNature.png" id="5_ic0xw"]
+[ext_resource type="Texture2D" uid="uid://bicga02nhbwl8" path="res://assets/additional assets/tileset.2/TilesetHouse.png" id="6_42smm"]
 [ext_resource type="Texture2D" uid="uid://dd4d8xxo60baf" path="res://assets/game/Objects/trees/tree1 (2).png" id="6_aov5o"]
-[ext_resource type="Texture2D" uid="uid://brabbpnwtolhn" path="res://assets/additional assets/tileset.2/TilesetWater.png" id="6_eyte7"]
+[ext_resource type="Texture2D" uid="uid://q1gf1eaxsflg" path="res://assets/additional assets/tileset.2/TilesetDesert.png" id="7_6m6c5"]
 [ext_resource type="Texture2D" uid="uid://beg3mqjlooew7" path="res://assets/game/Objects/trees/tree (1).png" id="7_gkm67"]
-[ext_resource type="Texture2D" uid="uid://b3n45kxxmf0qr" path="res://assets/additional assets/tileset.2/TilesetNature.png" id="7_kymrb"]
 [ext_resource type="PackedScene" uid="uid://d0bffpnsbp0d8" path="res://scenes/collectables/stone.tscn" id="8_as6pb"]
-[ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="8_enkr4"]
-[ext_resource type="PackedScene" uid="uid://cvkd1xndq44bq" path="res://scenes/objects/trees/tree.tscn" id="8_t3nim"]
 [ext_resource type="PackedScene" uid="uid://psqsv6p5bsaa" path="res://scenes/collectables/arrow.tscn" id="10_5imy4"]
-[ext_resource type="Script" uid="uid://bqwxjh07bes4f" path="res://time/time_system.gd" id="10_05xje"]
 [ext_resource type="Script" uid="uid://bdov4ggulw3yj" path="res://time/date_time.gd" id="11_aov5o"]
-[ext_resource type="PackedScene" uid="uid://ploigpntfaof" path="res://time/clock_gui.tscn" id="12_wctr1"]
-[ext_resource type="Script" uid="uid://foy100kq8743" path="res://scripts/canvas_layer.gd" id="13_4kcic"]
-[ext_resource type="Script" uid="uid://3ojckex6e0x" path="res://time/directional_light_2d.gd" id="13_fbn4n"]
-[ext_resource type="PackedScene" uid="uid://dr6sh5o7rl8nn" path="res://scenes/inventory/inventory_gui.tscn" id="14_2q2xp"]
-[ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
-[ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
-[ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="16_jxchy"]
-[ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
-[ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="19_dpw5s"]
-[ext_resource type="PackedScene" uid="uid://c1s67g6go710w" path="res://scenes/Buildings/building_system.tscn" id="23_qfnnp"]
-[ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_wslhl"]
-[ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_eyte7"]
-[ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
+[ext_resource type="PackedScene" uid="uid://cvkd1xndq44bq" path="res://scenes/objects/trees/tree.tscn" id="17_nb6ej"]
+[ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="18_vmw21"]
+[ext_resource type="Script" uid="uid://bqwxjh07bes4f" path="res://time/time_system.gd" id="19_op276"]
+[ext_resource type="Script" uid="uid://foy100kq8743" path="res://scripts/canvas_layer.gd" id="21_7qf6v"]
+[ext_resource type="PackedScene" uid="uid://ploigpntfaof" path="res://time/clock_gui.tscn" id="22_sbttf"]
+[ext_resource type="PackedScene" uid="uid://dr6sh5o7rl8nn" path="res://scenes/inventory/inventory_gui.tscn" id="23_d0unh"]
+[ext_resource type="PackedScene" uid="uid://c1s67g6go710w" path="res://scenes/Buildings/building_system.tscn" id="24_2hkr0"]
+[ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="25_5u3kr"]
+[ext_resource type="Script" uid="uid://3ojckex6e0x" path="res://time/directional_light_2d.gd" id="26_kvnru"]
+[ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="27_tsj5u"]
+[ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="28_cblcb"]
+[ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="29_l1kvr"]
+[ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="30_olw5p"]
+[ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_1uk7l"]
+[ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_x5ieo"]
+[ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_6t3q7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
-texture = ExtResource("2_yumbo")
+texture = ExtResource("2_wslhl")
 11:0/0 = 0
 12:0/0 = 0
 13:0/0 = 0
@@ -496,7 +496,7 @@ texture = ExtResource("2_yumbo")
 9:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6m6c5"]
-texture = ExtResource("4_8qfww")
+texture = ExtResource("3_eyte7")
 0:0/size_in_atlas = Vector2i(3, 3)
 0:0/0 = 0
 3:0/0 = 0
@@ -557,7 +557,7 @@ texture = ExtResource("4_8qfww")
 2:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vmw21"]
-texture = ExtResource("6_eyte7")
+texture = ExtResource("4_kymrb")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -710,7 +710,6 @@ texture = ExtResource("6_eyte7")
 21:7/0 = 0
 22:7/0 = 0
 0:8/0 = 0
-1:8/0 = 0
 2:8/0 = 0
 3:8/0 = 0
 4:8/0 = 0
@@ -823,7 +822,7 @@ sources/2 = SubResource("TileSetAtlasSource_6m6c5")
 sources/4 = SubResource("TileSetAtlasSource_vmw21")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sbttf"]
-texture = ExtResource("7_kymrb")
+texture = ExtResource("5_ic0xw")
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
 2:0/0 = 0
@@ -1190,7 +1189,7 @@ texture = ExtResource("7_kymrb")
 sources/0 = SubResource("TileSetAtlasSource_sbttf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yumbo"]
-texture = ExtResource("3_7fe6k")
+texture = ExtResource("6_42smm")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1789,7 +1788,7 @@ texture = ExtResource("3_7fe6k")
 31:22/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7fe6k"]
-texture = ExtResource("5_wslhl")
+texture = ExtResource("7_6m6c5")
 0:0/size_in_atlas = Vector2i(3, 3)
 0:0/0 = 0
 3:0/size_in_atlas = Vector2i(3, 5)
@@ -2585,42 +2584,42 @@ tile_set = SubResource("TileSet_4kcic")
 
 [node name="trees" type="Node" parent="."]
 
-[node name="tree9" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree9" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(664, 368)
 
-[node name="tree" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(334, 140)
 collision_layer = 1
 collision_mask = 1
 
-[node name="tree5" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree5" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(155, 425)
 
-[node name="tree4" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree4" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(521, 55)
 
-[node name="tree3" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree3" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(629, 203)
 
-[node name="tree2" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree2" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(379, 367)
 
-[node name="tree6" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree6" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(197, 255)
 
-[node name="tree7" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree7" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(493, 230)
 
-[node name="tree8" parent="trees" instance=ExtResource("8_t3nim")]
+[node name="tree8" parent="trees" instance=ExtResource("17_nb6ej")]
 position = Vector2(142, 68)
 
-[node name="Player" parent="." instance=ExtResource("8_enkr4")]
+[node name="Player" parent="." instance=ExtResource("18_vmw21")]
 position = Vector2(370, 214)
 scale = Vector2(1.5, 1.5)
 collision_mask = 1
 
 [node name="TimeSystem" type="Node" parent="."]
-script = ExtResource("10_05xje")
+script = ExtResource("19_op276")
 date_time = SubResource("Resource_wctr1")
 ticks_pr_sec = 120
 
@@ -2628,9 +2627,9 @@ ticks_pr_sec = 120
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-script = ExtResource("13_4kcic")
+script = ExtResource("21_7qf6v")
 
-[node name="timeGui" parent="CanvasLayer" instance=ExtResource("12_wctr1")]
+[node name="timeGui" parent="CanvasLayer" instance=ExtResource("22_sbttf")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -2640,7 +2639,7 @@ offset_right = -11.0
 offset_bottom = 74.0
 grow_horizontal = 0
 
-[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("14_2q2xp")]
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("23_d0unh")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -2653,7 +2652,7 @@ offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Building system" parent="CanvasLayer" instance=ExtResource("23_qfnnp")]
+[node name="Building system" parent="CanvasLayer" instance=ExtResource("24_2hkr0")]
 visibility_layer = 513
 
 [node name="multiplayerHUD" type="Control" parent="CanvasLayer"]
@@ -2688,7 +2687,7 @@ layout_mode = 2
 text = "join
 "
 
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("19_dpw5s")]
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("25_5u3kr")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -2703,19 +2702,19 @@ grow_vertical = 0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." node_paths=PackedStringArray("time_system")]
 blend_mode = 2
-script = ExtResource("13_fbn4n")
+script = ExtResource("26_kvnru")
 day_color = Color(1, 1, 1, 1)
 night_color = Color(0.454902, 0.486275, 1, 1)
 day_start = SubResource("Resource_c565e")
 night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
-[node name="Goblin" parent="." instance=ExtResource("14_c565e")]
+[node name="Goblin" parent="." instance=ExtResource("27_tsj5u")]
 
-[node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
+[node name="Goblin2" parent="." instance=ExtResource("27_tsj5u")]
 
-[node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]
-script = ExtResource("16_jxchy")
+[node name="EnemySpawner" parent="." instance=ExtResource("28_cblcb")]
+script = ExtResource("29_l1kvr")
 
 [node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
 
@@ -2742,7 +2741,7 @@ navigation_polygon = SubResource("NavigationPolygon_c565e")
 
 [node name="Portal" type="Node" parent="."]
 
-[node name="Portal" parent="Portal" instance=ExtResource("17_1rk7v")]
+[node name="Portal" parent="Portal" instance=ExtResource("30_olw5p")]
 position = Vector2(236, 282)
 destination_level_tag = "lobby"
 
@@ -2763,19 +2762,19 @@ spawn_limit = 2
 [node name="Boat" type="Sprite2D" parent="."]
 position = Vector2(1171, 138)
 rotation = 0.00896462
-texture = ExtResource("31_wslhl")
+texture = ExtResource("31_1uk7l")
 
 [node name="Sail" type="Sprite2D" parent="."]
 position = Vector2(1254, 119)
-texture = ExtResource("32_eyte7")
+texture = ExtResource("32_x5ieo")
 
 [node name="Sail2" type="Sprite2D" parent="."]
 position = Vector2(1249, 341)
-texture = ExtResource("32_eyte7")
+texture = ExtResource("32_x5ieo")
 
 [node name="Crane" type="Sprite2D" parent="."]
 position = Vector2(1253, 279)
-texture = ExtResource("33_kymrb")
+texture = ExtResource("33_6t3q7")
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]

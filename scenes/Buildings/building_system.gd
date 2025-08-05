@@ -98,6 +98,7 @@ func consume_stone() -> bool:
 					if "amount" in slot and slot.amount > 0:
 						var take_amount = min(slot.amount, stones_to_consume - consumed)
 						slot.amount -= take_amount
+						slot.amount -= take_amount
 						consumed += take_amount
 						
 						print("Consumed ", take_amount, " stones from slot. Slot remaining: ", slot.amount)
@@ -140,7 +141,6 @@ func _on_texture_button_pressed() -> void:
 	target_sibling.add_child(obj)
 	objects.append(obj)
 	print("Created Object: ", obj)
-
 
 func _on_buildings_pressed() -> void:
 	main_button.visible = false

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 NavigationManger="*res://scripts/NavigationManger.gd"
 MultiplayerManager="*res://scenes/multiplayer/mutiplayer_manager.gd"
+GlobalData="*res://scripts/GlobalData.gd"
 
 [display]
 

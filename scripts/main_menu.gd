@@ -13,6 +13,7 @@ func _ready():
 	load_audio_settings()
 
 func _on_play_pressed() -> void:
+	# Simply go to the game scene - it will automatically check for save files
 	get_tree().change_scene_to_file("res://scenes/test/testscenes_tilemap.tscn")
 
 func _on_options_pressed() -> void:

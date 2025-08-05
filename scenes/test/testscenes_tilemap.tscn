@@ -2722,6 +2722,69 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="EscMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="CanvasLayer/EscMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="MenuPanel" type="Panel" parent="CanvasLayer/EscMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EscMenu/MenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/EscMenu/MenuPanel/VBoxContainer"]
+layout_mode = 2
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="Separator1" type="HSeparator" parent="CanvasLayer/EscMenu/MenuPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/EscMenu/MenuPanel/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Separator2" type="HSeparator" parent="CanvasLayer/EscMenu/MenuPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveAndExitButton" type="Button" parent="CanvasLayer/EscMenu/MenuPanel/VBoxContainer"]
+layout_mode = 2
+text = "Save & Exit"
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." node_paths=PackedStringArray("time_system")]
 blend_mode = 2
 script = ExtResource("13_fbn4n")
@@ -2804,6 +2867,8 @@ texture = ExtResource("33_kymrb")
 [connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]
 [connection signal="pressed" from="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer/Host" to="." method="host"]
 [connection signal="pressed" from="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer/Join" to="." method="join"]
+[connection signal="pressed" from="CanvasLayer/EscMenu/MenuPanel/VBoxContainer/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/EscMenu/MenuPanel/VBoxContainer/SaveAndExitButton" to="." method="_on_save_and_exit_pressed"]
 [connection signal="timeout" from="EnemySpawner/Timer2" to="EnemySpawner" method="_on_timer_2_timeout"]
 
 [editable path="Portal/Portal"]

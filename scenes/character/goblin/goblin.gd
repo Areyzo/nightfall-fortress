@@ -46,8 +46,6 @@ func die():
 	set_physics_process(false)
 	velocity = Vector2.ZERO
 	
-	
-	
 	# Remove after a short delay
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

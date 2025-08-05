@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
-@onready var wood_scene = preload("res://scenes/collectables/stone.tscn")
+@onready var wood_scene = preload("res://scenes/collectables/log.tscn")
 var health = 3
 
 var item_dropped = false 

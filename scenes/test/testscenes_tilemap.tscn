@@ -811,6 +811,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/multiplayerHUD/PanelContainer"]
+visible = false
 layout_mode = 2
 offset_right = 40.0
 offset_bottom = 40.0
@@ -835,8 +836,12 @@ night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
+light_mask = 3
+visibility_layer = 3
 
 [node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
+light_mask = 3
+visibility_layer = 3
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]
 script = ExtResource("16_jxchy")

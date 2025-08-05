@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=4 uid="uid://bos1rp58kj7ba"]
+[gd_scene load_steps=10 format=4 uid="uid://bos1rp58kj7ba"]
 
 [ext_resource type="TileSet" uid="uid://dertqu87pmorx" path="res://Mines/tileset/new_tile_set.tres" id="1_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="2_qsf0h"]
+[ext_resource type="Script" uid="uid://foy100kq8743" path="res://scripts/canvas_layer.gd" id="3_fmur5"]
 [ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="3_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://cq82u1xtn0xth" path="res://scenes/character/cave_slime/slime_cave.tscn" id="4_k3yvu"]
+[ext_resource type="PackedScene" uid="uid://dr6sh5o7rl8nn" path="res://scenes/inventory/inventory_gui.tscn" id="5_e2jg3"]
 [ext_resource type="PackedScene" uid="uid://lysnfe8pdrpt" path="res://scenes/character/caveslime_vertical/slime_vertical.tscn" id="7_mbqn5"]
 [ext_resource type="PackedScene" uid="uid://g1us7ynty7cv" path="res://scenes/character/caveslime_horizontal/slime_horizontal.tscn" id="7_r010t"]
+[ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="7_rof45"]
 
 [node name="TestWorld" type="Node2D"]
 position = Vector2(226, 222)
@@ -55,5 +58,35 @@ position = Vector2(160, -160)
 
 [node name="slime_diagonal2" parent="." instance=ExtResource("4_k3yvu")]
 position = Vector2(240, -10)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("3_fmur5")
+
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("5_e2jg3")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = -42.0
+offset_right = 64.5
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("7_rof45")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -40.0
+offset_right = 83.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [editable path="Portal/Portal"]

@@ -103,6 +103,11 @@ func get_save_data() -> Dictionary:
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):  # ESC key
 		toggle_esc_menu()
+	
+	# B key to open building system
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_B:
+			toggle_building_menu()
 
 func toggle_esc_menu():
 	if is_esc_menu_open:
@@ -119,6 +124,23 @@ func close_esc_menu():
 	is_esc_menu_open = false
 	esc_menu.hide()
 	get_tree().paused = false
+
+func toggle_building_menu():
+	# Find the building system in the CanvasLayer
+	var building_system = canvaslayer.get_node_or_null("Building system")
+	if building_system:
+		# Check if the building menu is currently open
+		var control_node = building_system.get_node_or_null("Control")
+		if control_node and control_node.visible:
+			# Menu is open, close it
+			building_system._on_close_button_pressed()
+			print("Building menu closed with B key")
+		else:
+			# Menu is closed, open it
+			building_system._on_buildings_pressed()
+			print("Building menu opened with B key")
+	else:
+		print("Building system not found!")
 
 func _on_continue_pressed():
 	close_esc_menu()

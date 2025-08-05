@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=58 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
@@ -27,12 +27,13 @@
 [ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
 [ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
 [ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="16_jxchy"]
-[ext_resource type="PackedScene" uid="uid://cpq17to1bawnq" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
+[ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
 [ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="19_dpw5s"]
 [ext_resource type="PackedScene" uid="uid://c1s67g6go710w" path="res://scenes/Buildings/building_system.tscn" id="23_qfnnp"]
 [ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_wslhl"]
 [ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_eyte7"]
 [ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
+[ext_resource type="PackedScene" uid="uid://dr4nojqj275kd" path="res://scenes/npc.tscn" id="34_eyte7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")
@@ -2782,6 +2783,9 @@ texture = ExtResource("32_eyte7")
 [node name="Crane" type="Sprite2D" parent="."]
 position = Vector2(1253, 279)
 texture = ExtResource("33_kymrb")
+
+[node name="NPC" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(2053, 312)
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]

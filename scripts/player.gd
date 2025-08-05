@@ -178,3 +178,10 @@ func heal(amount: int) -> void:
 	current_health = min(current_health, maxhealth)  # Don't exceed max health
 	_update_health_bar()
 	print_debug("Player healed " + str(amount) + " health. Health: " + str(current_health) + "/" + str(maxhealth))
+
+func _process(delta):
+	if Input.is_action_just_pressed("interact"):
+		for area in $InteractionCheck.get_overlapping_areas():
+			var npc = area.get_parent()
+			if npc.has_method("interact"):
+				npc.interact()

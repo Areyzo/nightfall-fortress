@@ -37,17 +37,6 @@ func _on_play_pressed() -> void:
 	else:
 		print("ERROR: Scene file does not exist!")
 
-
-func _on_host_pressed() -> void:
-	print("=== HOST BUTTON PRESSED ===")
-	# Add your host game logic here
-	pass # Replace with host functionality
-
-
-func _on_join_pressed() -> void:
-	print("=== JOIN BUTTON PRESSED ===")
-	# Add your join game logic here
-	pass # Replace with join functionality
 func _on_options_pressed() -> void:
 	options_popup.visible = true
 	print("Options menu opened")

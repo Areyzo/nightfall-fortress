@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dm8nscln3p57o" path="res://scenes/character/goblin/goblin.tscn" id="14_c565e"]
 [ext_resource type="PackedScene" uid="uid://dy7itpa2tfp4p" path="res://scenes/character/EnemySpawner/enemy_spawner.tscn" id="15_aoqbf"]
 [ext_resource type="Script" uid="uid://c4b7kx7xx7b64" path="res://scenes/character/EnemySpawner/enemy_spawner.gd" id="16_jxchy"]
-[ext_resource type="PackedScene" uid="uid://cpq17to1bawnq" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
+[ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="17_1rk7v"]
 [ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="19_dpw5s"]
 [ext_resource type="PackedScene" uid="uid://c1s67g6go710w" path="res://scenes/Buildings/building_system.tscn" id="23_qfnnp"]
 [ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_wslhl"]
@@ -2666,8 +2666,6 @@ visibility_layer = 513
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 180.0
@@ -2681,7 +2679,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = null
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/multiplayerHUD/PanelContainer"]
 layout_mode = 1
@@ -2698,22 +2695,22 @@ theme_override_constants/separation = 8
 
 [node name="Label" type="Label" parent="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Multiplayer"
-horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.8, 0.8, 0.9, 1)
 theme_override_font_sizes/font_size = 14
+text = "Multiplayer"
+horizontal_alignment = 1
 
 [node name="Host" type="Button" parent="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "🖥️ Host Game"
 theme_override_colors/font_color = Color(0.2, 0.8, 0.3, 1)
 theme_override_font_sizes/font_size = 12
+text = "🖥️ Host Game"
 
 [node name="Join" type="Button" parent="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "🔗 Join Game"
 theme_override_colors/font_color = Color(0.3, 0.6, 0.9, 1)
 theme_override_font_sizes/font_size = 12
+text = "🔗 Join Game"
 
 [node name="Hotbar" parent="CanvasLayer" instance=ExtResource("19_dpw5s")]
 anchors_preset = 7

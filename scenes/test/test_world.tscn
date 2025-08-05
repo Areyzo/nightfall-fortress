@@ -1,16 +1,15 @@
-[gd_scene load_steps=12 format=4 uid="uid://bos1rp58kj7ba"]
+[gd_scene load_steps=11 format=4 uid="uid://bos1rp58kj7ba"]
 
 [ext_resource type="TileSet" uid="uid://dertqu87pmorx" path="res://Mines/tileset/new_tile_set.tres" id="1_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="2_qsf0h"]
+[ext_resource type="Script" uid="uid://foy100kq8743" path="res://scripts/canvas_layer.gd" id="3_fmur5"]
 [ext_resource type="PackedScene" uid="uid://b6oa61qqkjpyl" path="res://scenes/character/player/player.tscn" id="3_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://cq82u1xtn0xth" path="res://scenes/character/cave_slime/slime_cave.tscn" id="4_k3yvu"]
-[ext_resource type="Script" uid="uid://foy100kq8743" path="res://scripts/canvas_layer.gd" id="7_fmur5"]
+[ext_resource type="PackedScene" uid="uid://dr6sh5o7rl8nn" path="res://scenes/inventory/inventory_gui.tscn" id="5_e2jg3"]
 [ext_resource type="PackedScene" uid="uid://lysnfe8pdrpt" path="res://scenes/character/caveslime_vertical/slime_vertical.tscn" id="7_mbqn5"]
 [ext_resource type="PackedScene" uid="uid://g1us7ynty7cv" path="res://scenes/character/caveslime_horizontal/slime_horizontal.tscn" id="7_r010t"]
-[ext_resource type="PackedScene" uid="uid://ploigpntfaof" path="res://time/clock_gui.tscn" id="8_vut0w"]
-[ext_resource type="PackedScene" uid="uid://dr6sh5o7rl8nn" path="res://scenes/inventory/inventory_gui.tscn" id="9_e2jg3"]
-[ext_resource type="PackedScene" uid="uid://c1s67g6go710w" path="res://scenes/Buildings/building_system.tscn" id="10_0ehgn"]
-[ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="11_rof45"]
+[ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="7_rof45"]
+[ext_resource type="PackedScene" uid="uid://cufd3m0el2idc" path="res://scenes/chest/chest.tscn" id="10_l7hgw"]
 
 [node name="TestWorld" type="Node2D"]
 position = Vector2(226, 222)
@@ -63,19 +62,9 @@ position = Vector2(240, -10)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-script = ExtResource("7_fmur5")
+script = ExtResource("3_fmur5")
 
-[node name="timeGui" parent="CanvasLayer" instance=ExtResource("8_vut0w")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -106.0
-offset_top = 10.0
-offset_right = -11.0
-offset_bottom = 74.0
-grow_horizontal = 0
-
-[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("9_e2jg3")]
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("5_e2jg3")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -88,42 +77,7 @@ offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Building system" parent="CanvasLayer" instance=ExtResource("10_0ehgn")]
-visibility_layer = 513
-
-[node name="multiplayerHUD" type="Control" parent="CanvasLayer"]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = 100.0
-offset_top = 20.0
-offset_right = 140.0
-offset_bottom = 60.0
-
-[node name="PanelContainer" type="Panel" parent="CanvasLayer/multiplayerHUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/multiplayerHUD/PanelContainer"]
-layout_mode = 2
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Host" type="Button" parent="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Host
-"
-
-[node name="Join" type="Button" parent="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "join
-"
-
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("11_rof45")]
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("7_rof45")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -135,5 +89,14 @@ offset_right = 83.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="chest" parent="." instance=ExtResource("10_l7hgw")]
+position = Vector2(394, -180)
+
+[node name="chest2" parent="." instance=ExtResource("10_l7hgw")]
+position = Vector2(207, 104)
+
+[node name="chest3" parent="." instance=ExtResource("10_l7hgw")]
+position = Vector2(-189, 43)
 
 [editable path="Portal/Portal"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://clkk50bvy1omt"]
+
+[ext_resource type="Script" uid="uid://i15tfocx4xwx" path="res://scenes/Buildings/buildings.gd" id="1_sm8gy"]
+[ext_resource type="Texture2D" uid="uid://doixy1qk8im0e" path="res://scenes/Buildings/building3.png" id="2_sm8gy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sydaj"]
+radius = 108.78
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sydaj"]
+radius = 16.0
+height = 50.0
+
+[node name="buildings" type="Node2D"]
+script = ExtResource("1_sm8gy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 1
+
+[node name="BuildingCollision" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(217, 169)
+shape = SubResource("CapsuleShape2D_sydaj")
+
+[node name="Hit_Range" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="Range" type="CollisionShape2D" parent="Hit_Range"]
+position = Vector2(217, 169)
+shape = SubResource("CircleShape2D_sydaj")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(217, 166)
+scale = Vector2(0.490826, 0.522556)
+texture = ExtResource("2_sm8gy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(217, 169)
+shape = SubResource("CapsuleShape2D_sydaj")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Hit_Range" to="." method="_on_hit_range_area_entered"]
+[connection signal="area_exited" from="Hit_Range" to="." method="_on_hit_range_area_exited"]
+[connection signal="area_shape_entered" from="Hit_Range" to="." method="_on_hit_range_area_shape_entered"]
+[connection signal="area_shape_exited" from="Hit_Range" to="." method="_on_hit_range_area_shape_exited"]
+[connection signal="body_shape_entered" from="Hit_Range" to="." method="_on_hit_range_body_shape_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

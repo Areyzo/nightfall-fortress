@@ -8,6 +8,7 @@ class_name Player
 @export var  SPEED: int = 150
 @export var maxhealth: int = 100  # Increased from 3 to 100 for better combat
 @export var inventory: Inventory
+
 var current_health: int
 var doChop = false
 var targets_hit_this_attack = []  # Track what we've hit during current attack

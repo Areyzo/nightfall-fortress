@@ -2,8 +2,6 @@ extends Control
 
 signal respawn_requested
 
-
-
 func _ready():
 	# Hide the screen initially and ensure it starts hidden
 	print("Game over screen _ready() called")

@@ -33,7 +33,7 @@ func insert(item: InventoryItem):
 		else:
 			print("Slot ", i, " is empty or null")
 
-	# If stacking failed or maxed out, find an empty slot
+	# If stacking failed or maxed out, find an empty slotd
 	for i in range(slots.size()):
 		var slot = slots[i]
 		if slot != null and slot.item == null:

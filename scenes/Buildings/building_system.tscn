@@ -21,6 +21,17 @@ offset_right = 443.0
 offset_bottom = 238.0
 texture = ExtResource("1_see7g")
 
+[node name="CloseButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 405.0
+offset_top = 96.0
+offset_right = 443.0
+offset_bottom = 134.0
+text = "×"
+theme_override_colors/font_color = Color(0.8, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 24
+flat = false
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 157.0
@@ -66,4 +77,5 @@ text = "Buildings
 "
 
 [connection signal="pressed" from="Control/HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Control/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="Buildings" to="." method="_on_buildings_pressed"]

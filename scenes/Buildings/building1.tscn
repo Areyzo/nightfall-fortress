@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://i15tfocx4xwx" path="res://scenes/Buildings/buildings.gd" id="1_8inxu"]
 [ext_resource type="Texture2D" uid="uid://cy7y5hg1100o8" path="res://scenes/Buildings/building2.png" id="2_8inxu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sydaj"]
-radius = 108.78
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sydaj"]
 radius = 16.0
 height = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sydaj"]
+radius = 108.78
 
 [node name="buildings" type="Node2D"]
 script = ExtResource("1_8inxu")

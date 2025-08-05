@@ -150,12 +150,28 @@ func _on_hit_range_area_shape_exited(area) -> void:
 func _on_timer_timeout() -> void:
 	print("=== TIMER FIRED ===")
 	print("Building placed: ", placed)
-	print("Targets in range: ", target_within_range.size())
 	
 	# Only attack if building is placed
 	if not placed:
 		print("❌ Building not placed yet, skipping attack")
 		return
+	
+	# ACTIVE SCANNING: Check for goblins in range every timer tick
+	print("🔍 Actively scanning for goblins in range...")
+	if $Hit_Range != null:
+		var overlapping_areas = $Hit_Range.get_overlapping_areas()
+		print("Found ", overlapping_areas.size(), " areas overlapping with building range")
+		
+		# Clear old targets and rebuild list with current overlapping goblins
+		target_within_range.clear()
+		
+		for area in overlapping_areas:
+			print("Checking overlapping area: ", area.name)
+			if (area.name.contains("Goblin") or area.name.contains("goblin")) and is_instance_valid(area):
+				target_within_range.append(area)
+				print("✅ Active scan found goblin: ", area.name)
+	
+	print("Targets in range after scan: ", target_within_range.size())
 	
 	if target_within_range.size() > 0:
 		print("Found targets, attempting to attack...")

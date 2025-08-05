@@ -12,6 +12,9 @@ var current_health: int
 var doChop = false
 var targets_hit_this_attack = []  # Track what we've hit during current attack
 
+# Signals
+signal player_died
+
 @onready var health_bar = $TextureProgressBar
 
 
@@ -170,8 +173,28 @@ func _update_health_bar() -> void:
 
 func _die() -> void:
 	print_debug("Player died!")
+	
+	# Emit death signal
+	player_died.emit()
+	
+	# Clear inventory on death
+	clear_inventory()
+	
 	# Add death logic here (restart level, show game over screen, etc.)
 	get_tree().reload_current_scene()
+
+func clear_inventory() -> void:
+	"""Clear all items from the player's inventory"""
+	if inventory and inventory.slots:
+		print_debug("Clearing inventory on death...")
+		for slot in inventory.slots:
+			if slot:
+				slot.item = null
+				slot.amount = 0
+		inventory.updated.emit()
+		print_debug("Inventory cleared!")
+	else:
+		print_debug("No inventory to clear")
 
 func heal(amount: int) -> void:
 	current_health += amount

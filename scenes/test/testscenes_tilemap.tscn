@@ -2798,6 +2798,7 @@ night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
+position = Vector2(60, 200)
 
 [node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
 
@@ -2806,12 +2807,12 @@ script = ExtResource("16_jxchy")
 
 [node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
 
-[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2(0, 200)
-
 [node name="SpawnPoint2" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
 position = Vector2(600, 0)
 gizmo_extents = 0.0
+
+[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
+position = Vector2(0, 200)
 
 [node name="Spawnpoint3" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
 position = Vector2(400, 0)
@@ -2824,7 +2825,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(-6, -2)
+position = Vector2(0, 15)
 navigation_polygon = SubResource("NavigationPolygon_c565e")
 
 [node name="Portal" type="Node" parent="."]

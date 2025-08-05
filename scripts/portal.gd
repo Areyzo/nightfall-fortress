@@ -13,7 +13,12 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	# Check if it's the player using multiple methods
 	if body.is_in_group("player") or body.name.to_lower().contains("player"):
-		print("Player detected! Teleporting to: ", destination_level_tag)
+		print("Player detected! Saving game before teleportation...")
+		
+		# Save the current game state before teleporting
+		save_current_game_state()
+		
+		print("Teleporting to: ", destination_level_tag)
 		
 		# Check if NavigationManger exists (note the typo in the original)
 		if has_node("/root/NavigationManger"):
@@ -31,3 +36,49 @@ func _on_body_entered(body: Node2D) -> void:
 				print("Unknown destination: ", destination_level_tag)
 	else:
 		print("Non-player body detected: ", body.name)
+
+func save_current_game_state():
+	# Find the player in the current scene
+	var player = get_tree().get_first_node_in_group("player")
+	if not player:
+		print("Player not found for saving!")
+		return
+	
+	# Don't save if player is dead or has no health
+	if "current_health" in player and player.current_health <= 0:
+		print("Portal: Player is dead - not saving game state")
+		return
+	
+	var save_data = {}
+	
+	# Save player position
+	save_data["player_position"] = {
+		"x": player.global_position.x,
+		"y": player.global_position.y
+	}
+	
+	# Save inventory data
+	if player.inventory and player.inventory.slots:
+		var inventory_data = []
+		for i in range(player.inventory.slots.size()):
+			var slot = player.inventory.slots[i]
+			if slot and slot.item:
+				inventory_data.append({
+					"index": i,
+					"item_name": slot.item.name,
+					"amount": slot.amount
+				})
+		save_data["inventory"] = inventory_data
+		print("Portal: Saved ", inventory_data.size(), " inventory items")
+	
+	# Save timestamp
+	save_data["timestamp"] = Time.get_unix_time_from_system()
+	
+	# Write to save file
+	var save_file = FileAccess.open("user://savegame.json", FileAccess.WRITE)
+	if save_file:
+		save_file.store_string(JSON.stringify(save_data))
+		save_file.close()
+		print("Portal: Game saved successfully before teleportation!")
+	else:
+		print("Portal: Failed to save game!")

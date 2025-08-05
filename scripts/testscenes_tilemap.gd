@@ -10,6 +10,10 @@ var should_load_save = false
 func _ready():
 	if esc_menu:
 		esc_menu.hide()
+		
+	# Connect to player death signal if available
+	if player and player.has_signal("player_died"):
+		player.connect("player_died", _on_player_died)
 	
 	# Check if we should load a saved game
 	# We'll check this directly instead of using GlobalData for now
@@ -200,4 +204,13 @@ func join():
 	print("join")
 	%multiplayerHUD.hide()
 	MultiplayerManager.join_as_player()
+
+func _on_player_died():
+	"""Handle player death - clear any saved inventory data"""
+	print("Player died! Clearing saved inventory data...")
+	
+	# Delete the save file so the player starts fresh
+	if FileAccess.file_exists("user://savegame.json"):
+		DirAccess.remove_absolute("user://savegame.json")
+		print("Save file deleted - player will start with empty inventory on respawn")
 	

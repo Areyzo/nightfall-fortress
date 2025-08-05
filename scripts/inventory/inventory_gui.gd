@@ -30,20 +30,43 @@ func connectSlots():
 
 
 func update():
+	print("=== INVENTORY GUI UPDATE CALLED ===")
+	print("Total inventory slots: ", inventory.slots.size() if inventory else "INVENTORY_NULL")
+	
+	if not inventory or not inventory.slots:
+		print("ERROR: Inventory or slots is null!")
+		return
+	
 	for i in range(min(inventory.slots.size(), slots.size())):
-		var inventorySlot: InventorySlot=inventory.slots[i]
+		var inventorySlot: InventorySlot = inventory.slots[i]
 		
-		if inventorySlot == null or inventorySlot.item == null:continue
-
+		# More defensive null checking
+		if inventorySlot == null:
+			print("GUI Slot ", i, ": INVENTORY_SLOT_NULL")
+			continue
+			
+		if inventorySlot.item == null:
+			print("GUI Slot ", i, ": EMPTY")
+			continue
 		
+		# Extra safety check before accessing item properties
+		if inventorySlot.item != null:
+			print("GUI Slot ", i, ": ", inventorySlot.item.name, " amount: ", inventorySlot.amount)
+		else:
+			print("GUI Slot ", i, ": ITEM_BECAME_NULL")
+			continue
 		
-		var itemStackGui : ItemStackGui= slots[i].itemStackGui 
-		if !itemStackGui :
-			itemStackGui=ItemStackGuiClass.instantiate()
+		var itemStackGui : ItemStackGui = slots[i].itemStackGui 
+		if !itemStackGui:
+			itemStackGui = ItemStackGuiClass.instantiate()
 			slots[i].insert(itemStackGui)
+			print("Created new ItemStackGui for slot ", i)
 			
 		itemStackGui.inventorySlot = inventorySlot
 		itemStackGui.update()
+		print("Updated ItemStackGui for slot ", i, " with item: ", inventorySlot.item.name if inventorySlot.item else "NULL_ITEM")
+	
+	print("=== INVENTORY GUI UPDATE COMPLETE ===")
 			
 
 

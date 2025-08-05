@@ -1,210 +1,213 @@
 extends CharacterBody2D
 
-class_name Player
-
+# Node references
 @onready var animated_sprite_2d = $flip/AnimatedSprite2D
 @onready var damage_box = $flip/damagebox
 @onready var flip = $flip
-@export var  SPEED: int = 150
-@export var maxhealth: int = 100  # Increased from 3 to 100 for better combat
-@export var inventory: Inventory
-var current_health: int
-var doChop = false
-var targets_hit_this_attack = []  # Track what we've hit during current attack
+@onready var hp_bar = $TextureProgressBar
 
-# Signals
+# Movement constants
+const SPEED = 150.0
+const FRICTION = 800.0
+
+# State variables
+var is_attacking = false
+var facing_direction = 1  # 1 = right, -1 = left
+
+# Health system
+@export var max_health = 100
+var current_health : int
+signal health_changed(new_health)
 signal player_died
 
-@onready var health_bar = $TextureProgressBar
-
-
-func _ready() :
-	current_health = maxhealth
-	_update_health_bar()
-	add_to_group("player")
-	
-
-
-func _physics_process(_delta):
-	if Input.is_action_just_pressed("attack"):
-		print_debug("Do chop called")
-		_do_chop()
-		
-	var direction = Vector2.ZERO
-	direction.x = Input.get_axis("left", "right")
-	direction.y = Input.get_axis("up", "down")
-	if direction:
-		velocity = direction.normalized() * SPEED  # Fixed: added .normalized()
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-		
-	_set_animation()
-	move_and_slide()
-
-func _set_animation():
-	if velocity.x < 0:
-		flip.scale.x = -1
-	elif velocity.x > 0: 
-		flip.scale.x = 1
-	if doChop: return
-	
-	if velocity:
-		animated_sprite_2d.play("run")
-	else:
-		animated_sprite_2d.play("idle")
-
-
-func _do_chop():
-	if doChop:
-		return
-		
-	doChop = true
-	targets_hit_this_attack.clear()  # Clear hit list for new attack
-	animated_sprite_2d.play("chop")
-	print_debug("Starting attack animation")
-
-func _hit_target():
-	var targets = damage_box.get_overlapping_bodies()
-	
-	print_debug("Damage box overlapping bodies: ", targets.size())
-	for body in targets:
-		print_debug("  - ", body.name, " (groups: ", body.get_groups(), ")")
-	
-	# Method 1: Check Area2D overlapping bodies
-	var hit_something = false
-	for collisionBody in targets:
-		if collisionBody == self:  # Don't hit yourself
-			continue
-			
-		# Skip if we already hit this target during this attack
-		if collisionBody in targets_hit_this_attack:
-			print_debug("Already hit ", collisionBody.name, " during this attack")
-			continue
-			
-		print_debug("Checking target: ", collisionBody.name)
-		
-		# Check if it's a tree
-		if collisionBody.is_in_group("trees"):
-			print_debug("Hitting tree: ", collisionBody.name)
-			if collisionBody.has_method("get_hit"):
-				collisionBody.get_hit(flip.scale.x)
-				targets_hit_this_attack.append(collisionBody)  # Add to hit list
-				hit_something = true
-		
-		# Check if it's an enemy (slime, goblin, etc.)
-		elif collisionBody.is_in_group("enemies"):
-			if collisionBody.has_method("take_damage"):
-				collisionBody.take_damage(25)  # Reduced damage: 25 per hit
-				targets_hit_this_attack.append(collisionBody)  # Add to hit list
-				print_debug("Player attacked enemy ", collisionBody.name, " for 25 damage!")
-				hit_something = true
-			else:
-				print_debug("Enemy ", collisionBody.name, " doesn't have take_damage method!")
-		else:
-			print_debug("Target ", collisionBody.name, " is not in trees or enemies group")
-	
-	# Method 2: Backup proximity check for enemies (in case Area2D fails)
-	if not hit_something:
-		print_debug("No hits from Area2D, checking proximity...")
-		var attack_range = 60  # Attack range in pixels
-		var enemies = get_tree().get_nodes_in_group("enemies")
-		
-		for enemy in enemies:
-			if enemy == self or not is_instance_valid(enemy):
-				continue
-				
-			# Skip if we already hit this enemy during this attack
-			if enemy in targets_hit_this_attack:
-				continue
-				
-			var distance = global_position.distance_to(enemy.global_position)
-			print_debug("Enemy ", enemy.name, " distance: ", distance)
-			
-			if distance <= attack_range:
-				# Check if enemy is in front of player (basic direction check)
-				var direction_to_enemy = (enemy.global_position - global_position).normalized()
-				var player_facing = Vector2(flip.scale.x, 0).normalized()
-				var dot_product = direction_to_enemy.dot(player_facing)
-				
-				if dot_product > 0.3:  # Enemy is roughly in front of player
-					if enemy.has_method("take_damage"):
-						enemy.take_damage(25)  # Reduced damage: 25 per hit
-						targets_hit_this_attack.append(enemy)  # Add to hit list
-						print_debug("Proximity attack hit enemy ", enemy.name, " for 25 damage!")
-						hit_something = true
-	
-	if not hit_something:
-		print_debug("No targets hit by attack")
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	doChop = false
-	targets_hit_this_attack.clear()  # Clear hit list when attack ends
-	print_debug("animation ended")
-	animated_sprite_2d.play("idle")
-
-func _on_animated_sprite_2d_frame_changed() -> void:
-	if animated_sprite_2d == null:
-		return
-	
-	var frame = animated_sprite_2d.frame
-	if animated_sprite_2d.animation == "chop":
-		# Check for hits on multiple frames to catch moving enemies
-		if frame >= 2 and frame <= 4:  # Frames 2, 3, and 4
-			_hit_target()
-			print_debug("Attack check on frame: ", frame)
+# Inventory system
+@export var inventory : Inventory  # This will be set in the scene
 
 func get_inventory() -> Inventory:
 	return inventory
 
-func take_damage(damage: int) -> void:
-	current_health -= damage
-	current_health = max(current_health, 0)  # Prevent negative health
-	_update_health_bar()
+# Attack system
+@export var attack_damage = 50
+var attack_cooldown = 0.0
+const ATTACK_COOLDOWN_TIME = 0.5
+
+func _ready():
+	add_to_group("player")
+	current_health = max_health
+	update_health_bar()
 	
-	print_debug("Player took " + str(damage) + " damage. Health: " + str(current_health) + "/" + str(maxhealth))
+	# Connect health signal for UI updates or other systems
+	health_changed.connect(_on_health_changed)
+
+func _physics_process(delta):
+	handle_input()
+	handle_movement(delta)
+	handle_attack_cooldown(delta)
+	set_animation()
+	move_and_slide()
+
+func handle_input():
+	# Attack input
+	if Input.is_action_just_pressed("attack") and not is_attacking and attack_cooldown <= 0:
+		do_chop()
+
+func handle_movement(delta):
+	var direction = Vector2.ZERO
+	direction.x = Input.get_axis("left", "right")
+	direction.y = Input.get_axis("up", "down")
+	
+	if direction != Vector2.ZERO:
+		velocity = direction.normalized() * SPEED
+		# Update facing direction
+		if direction.x != 0:
+			facing_direction = sign(direction.x)
+	else:
+		# Apply friction
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+
+func handle_attack_cooldown(delta):
+	if attack_cooldown > 0:
+		attack_cooldown -= delta
+
+func set_animation():
+	# Set sprite direction
+	flip.scale.x = facing_direction
+	
+	# Don't change animation if attacking
+	if is_attacking:
+		return
+	
+	# Set movement animations
+	if velocity.length() > 10:  # Small threshold to prevent jitter
+		animated_sprite_2d.play("run")
+	else:
+		animated_sprite_2d.play("idle")
+
+func do_chop():
+	if is_attacking:
+		return
+	
+	is_attacking = true
+	attack_cooldown = ATTACK_COOLDOWN_TIME
+	animated_sprite_2d.play("chop")
+	print_debug("Player attacking!")
+
+func hit_targets():
+	var targets = damage_box.get_overlapping_bodies()
+	
+	if targets.is_empty():
+		print_debug("No targets in range")
+		return
+	
+	for target in targets:
+		if target == self:  # Don't hit yourself
+			continue
+			
+		if target.has_method("get_hit") and target.is_in_group("trees"):
+			target.get_hit(facing_direction)
+			print_debug("Hit tree: ", target.name)
+		elif target.has_method("take_damage") and target.is_in_group("enemies"):
+			target.take_damage(attack_damage)
+			print_debug("Hit enemy: ", target.name, " for ", attack_damage, " damage")
+
+func take_damage(amount: int):
+	if current_health <= 0:  # Already dead
+		return
+		
+	current_health -= amount
+	current_health = clamp(current_health, 0, max_health)
+	
+	health_changed.emit(current_health)
+	print("Player took ", amount, " damage! Current HP: ", current_health)
+	
+	# Add hit effect here (screen shake, sound, etc.)
 	
 	if current_health <= 0:
-		_die()
+		die()
 
-func _update_health_bar() -> void:
-	if health_bar:
-		health_bar.value = (float(current_health) / float(maxhealth)) * 100.0
-
-func _die() -> void:
-	print_debug("Player died!")
-	
-	# Emit death signal
-	player_died.emit()
-	
-	# Clear inventory on death
-	clear_inventory()
-	
-	# Add death logic here (restart level, show game over screen, etc.)
-	get_tree().get_root().get_node("Main/CanvasLayer/GameOverScreen")
-
-func clear_inventory() -> void:
-	"""Clear all items from the player's inventory"""
-	if inventory and inventory.slots:
-		print_debug("Clearing inventory on death...")
-		for slot in inventory.slots:
-			if slot:
-				slot.item = null
-				slot.amount = 0
-		inventory.updated.emit()
-		print_debug("Inventory cleared!")
-	else:
-		print_debug("No inventory to clear")
-
-func heal(amount: int) -> void:
+func heal(amount: int):
+	if current_health >= max_health:
+		return
+		
 	current_health += amount
-	current_health = min(current_health, maxhealth)  # Don't exceed max health
-	_update_health_bar()
-	print_debug("Player healed " + str(amount) + " health. Health: " + str(current_health) + "/" + str(maxhealth))
+	current_health = clamp(current_health, 0, max_health)
+	health_changed.emit(current_health)
+	print("Player healed for ", amount, "! Current HP: ", current_health)
 
-func _process(delta):
-	if Input.is_action_just_pressed("interact"):
-		for area in $InteractionCheck.get_overlapping_areas():
-			var npc = area.get_parent()
-			if npc.has_method("interact"):
-				npc.interact()
+func update_health_bar():
+	if hp_bar:
+		hp_bar.max_value = max_health
+		hp_bar.value = current_health
+
+func die():
+	print("=== PLAYER DIE FUNCTION CALLED ===")
+	print("Current health: ", current_health)
+	print("About to emit player_died signal...")
+	player_died.emit()
+	print("player_died signal emitted!")
+	# Add death animation/effect here
+	# For now, just disable the player
+	set_physics_process(false)
+	print("Physics process disabled")
+	print("Player die() function complete")
+	# You might want to transition to game over scene instead
+	# get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+
+func respawn(spawn_position: Vector2 = Vector2.ZERO):
+	"""Respawn the player at given position with full health"""
+	print("=== PLAYER RESPAWN FUNCTION CALLED ===")
+	print("Spawn position: ", spawn_position)
+	print("Current position: ", global_position)
+	print("Current health before respawn: ", current_health)
+	
+	# Reset position
+	global_position = spawn_position
+	
+	# Reset health to full
+	current_health = max_health
+	print("Health set to max_health: ", max_health)
+	
+	# Update health bar visually
+	update_health_bar()
+	
+	# Emit health changed signal for any UI listeners
+	health_changed.emit(current_health)
+	
+	# Re-enable physics and reset states
+	set_physics_process(true)
+	is_attacking = false
+	attack_cooldown = 0
+	animated_sprite_2d.play("idle")
+	
+	print("Player respawned at: ", global_position, " with health: ", current_health)
+	print("Health bar updated and player fully restored!")
+
+# Inventory methods (if you want to use the inventory system)
+func add_item_to_inventory(item: InventoryItem) -> bool:
+	if inventory and inventory.has_method("insert"):
+		inventory.insert(item)
+		print("Added item to inventory: ", item.name)
+		return true
+	print("Failed to add item - no inventory system")
+	return false
+
+func remove_item_from_inventory(item: InventoryItem) -> bool:
+	if inventory and inventory.has_method("remove_item"):
+		return inventory.remove_item(item)
+	return false
+
+# Signal callbacks
+func _on_animated_sprite_2d_animation_finished():
+	if animated_sprite_2d.animation == "chop":
+		is_attacking = false
+		print_debug("Attack animation finished")
+		animated_sprite_2d.play("idle")
+
+func _on_animated_sprite_2d_frame_changed():
+	# Hit targets on specific frame of attack animation
+	if animated_sprite_2d.animation == "chop" and animated_sprite_2d.frame == 3:
+		hit_targets()
+
+func _on_health_changed(new_health):
+	update_health_bar()
+	# Add any other health-related effects here

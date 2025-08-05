@@ -158,17 +158,29 @@ func respawn(spawn_position: Vector2 = Vector2.ZERO):
 	print("=== PLAYER RESPAWN FUNCTION CALLED ===")
 	print("Spawn position: ", spawn_position)
 	print("Current position: ", global_position)
-	print("Current health: ", current_health)
+	print("Current health before respawn: ", current_health)
 	
+	# Reset position
 	global_position = spawn_position
+	
+	# Reset health to full
 	current_health = max_health
+	print("Health set to max_health: ", max_health)
+	
+	# Update health bar visually
+	update_health_bar()
+	
+	# Emit health changed signal for any UI listeners
 	health_changed.emit(current_health)
+	
+	# Re-enable physics and reset states
 	set_physics_process(true)
 	is_attacking = false
 	attack_cooldown = 0
 	animated_sprite_2d.play("idle")
 	
 	print("Player respawned at: ", global_position, " with health: ", current_health)
+	print("Health bar updated and player fully restored!")
 
 # Inventory methods (if you want to use the inventory system)
 func add_item_to_inventory(item: InventoryItem) -> bool:

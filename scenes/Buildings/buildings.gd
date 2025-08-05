@@ -12,6 +12,12 @@ func _ready() -> void:
 	visible = false
 	print("Building created")
 	
+	# Disable collision during placement
+	if $StaticBody2D != null:
+		$StaticBody2D.set_collision_layer_value(1, false)  # Disable collision with world layer
+		$StaticBody2D.set_collision_mask_value(1, false)   # Disable collision detection
+		print("Building collision disabled for placement")
+	
 	# DON'T start timer until building is placed
 	
 	# Check collision setup and ensure monitoring is enabled
@@ -91,6 +97,16 @@ func _input(event: InputEvent) -> void:
 						placed = true
 						is_being_placed = false  # Stop following mouse
 						
+						# Enable collision when building is placed
+						if $StaticBody2D != null:
+							$StaticBody2D.set_collision_layer_value(1, true)  # Enable collision with world layer
+							$StaticBody2D.set_collision_mask_value(1, true)   # Enable collision detection
+							print("Building collision enabled - now blocks movement")
+						
+						# Make sprite fully opaque
+						if $Area2D/Sprite2D != null:
+							$Area2D/Sprite2D.modulate = Color(1, 1, 1, 1.0)  # Fully opaque
+						
 						# Start the timer when building is placed
 						if $Timer != null:
 							$Timer.start()
@@ -106,6 +122,12 @@ func _input(event: InputEvent) -> void:
 					print("Building placed (no collision detection)")
 					placed = true
 					is_being_placed = false  # Stop following mouse
+					
+					# Enable collision when building is placed
+					if $StaticBody2D != null:
+						$StaticBody2D.set_collision_layer_value(1, true)  # Enable collision with world layer
+						$StaticBody2D.set_collision_mask_value(1, true)   # Enable collision detection
+						print("Building collision enabled - now blocks movement")
 					
 					# Start the timer when building is placed
 					if $Timer != null:

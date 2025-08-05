@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dv0i73c788b3q"
+path="res://.godot/imported/The Legend of Zelda Breath of the Wild Korok Forest (Day).mp3-045c636782d935128eb7a7e4c11dec2f.mp3str"
+
+[deps]
+
+source_file="res://assets/The Legend of Zelda Breath of the Wild Korok Forest (Day).mp3"
+dest_files=["res://.godot/imported/The Legend of Zelda Breath of the Wild Korok Forest (Day).mp3-045c636782d935128eb7a7e4c11dec2f.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

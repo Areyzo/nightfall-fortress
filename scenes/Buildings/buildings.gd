@@ -17,9 +17,20 @@ func _ready() -> void:
 		$Timer.start()
 		print("Timer started for testing")
 	
-	# Check collision setup
+	# Check collision setup and ensure monitoring is enabled
 	if $Hit_Range != null:
 		print("Hit_Range collision setup: Layer ", $Hit_Range.collision_layer, ", Mask ", $Hit_Range.collision_mask)
+		$Hit_Range.monitoring = true
+		$Hit_Range.monitorable = true
+		print("Hit_Range monitoring enabled: ", $Hit_Range.monitoring)
+		print("Hit_Range monitorable enabled: ", $Hit_Range.monitorable)
+		
+		# Force check for existing overlapping areas
+		var overlapping_areas = $Hit_Range.get_overlapping_areas()
+		print("Found ", overlapping_areas.size(), " overlapping areas at start")
+		for area in overlapping_areas:
+			print("Initial overlap: ", area.name)
+			_on_hit_range_area_entered(area)
 	else:
 		print("ERROR: Hit_Range not found!")
 
@@ -194,7 +205,7 @@ func _on_timer_timeout() -> void:
 
 
 func _on_hit_range_area_entered(area: Area2D) -> void:
-	print("=== AREA ENTERED ===")
+	print("🚨 AREA_ENTERED SIGNAL FIRED!")
 	print("Area name: ", area.name)
 	var parent_name = "No parent"
 	if area.get_parent():
@@ -202,6 +213,8 @@ func _on_hit_range_area_entered(area: Area2D) -> void:
 	print("Area parent: ", parent_name)
 	print("Full path: ", area.get_path())
 	print("Area valid: ", is_instance_valid(area))
+	print("Area collision layer: ", area.collision_layer)
+	print("Building mask: ", $Hit_Range.collision_mask)
 	
 	# Check multiple conditions for goblin detection
 	var is_goblin = false
@@ -228,10 +241,13 @@ func _on_hit_range_area_entered(area: Area2D) -> void:
 
 
 func _on_hit_range_area_exited(area: Area2D) -> void:
-	print("Area exited - Name: ", area.name)
+	print("🚪 AREA_EXITED SIGNAL FIRED!")
+	print("Area name: ", area.name)
 	if (area.name.contains("Goblin") or area.name.contains("goblin")) and target_within_range.size() > 0:
 		target_within_range.erase(area)
-		print("Goblin exited building range: ", area.name, " Remaining targets: ", target_within_range.size())
+		print("🎯 Goblin removed from target list! Remaining targets: ", target_within_range.size())
+	else:
+		print("Non-goblin area exited or no targets to remove")
 
 
 func _on_hit_range_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:

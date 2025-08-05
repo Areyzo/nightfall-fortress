@@ -14,7 +14,6 @@ radius = 108.78
 script = ExtResource("1_8inxu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 1
 
 [node name="BuildingCollision" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(217, 169)

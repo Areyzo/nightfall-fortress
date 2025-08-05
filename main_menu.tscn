@@ -51,24 +51,6 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
 text = "Start game"
 
-[node name="Host" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_fu7sn")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
-text = "Host"
-
-[node name="Join" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_fu7sn")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
-text = "Join"
-
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -99,6 +81,4 @@ theme_override_font_sizes/font_size = 45
 text = "Night fortress"
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

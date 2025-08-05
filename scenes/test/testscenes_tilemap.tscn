@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_wslhl"]
 [ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_eyte7"]
 [ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
-[ext_resource type="PackedScene" uid="uid://dr4nojqj275kd" path="res://scenes/npc.tscn" id="34_eyte7"]
+[ext_resource type="PackedScene" path="res://scenes/npc.tscn" id="34_eyte7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")
@@ -2868,6 +2868,18 @@ texture = ExtResource("33_kymrb")
 
 [node name="NPC" parent="." instance=ExtResource("34_eyte7")]
 position = Vector2(2053, 312)
+
+[node name="NPC2" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(1370, 24)
+
+[node name="NPC3" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(1984, 9)
+
+[node name="NPC4" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(2259, -37)
+
+[node name="NPC5" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(2161, 232)
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]

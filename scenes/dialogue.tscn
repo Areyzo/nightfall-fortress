@@ -1,31 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxx4stiy776wu"]
+[gd_scene load_steps=2 format=3 uid="uid://dxx4stiy776wu"]
 
 [ext_resource type="Script" uid="uid://cwvhpog6wuy7s" path="res://scenes/dialogue.gd" id="1_jwyou"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_jwyou"]
 
 [node name="dialogue" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_jwyou")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-modulate = Color(0.272163, 0.37956, 0.367315, 1)
-show_behind_parent = true
+[node name="name" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = -65.0
-offset_top = -52.0
-offset_right = 106.0
-offset_bottom = -24.0
-texture = SubResource("CanvasTexture_jwyou")
-
-[node name="name" type="RichTextLabel" parent="NinePatchRect"]
-modulate = Color(0.051791, 0.115207, 0.0908585, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 5.0
-offset_right = 169.0
-offset_bottom = 29.0
+offset_left = -100.0
+offset_top = -15.0
+offset_right = 100.0
+offset_bottom = 15.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_font_sizes/normal_font_size = 12
 text = "NPC :  Hello Traveller"
 fit_content = true
 tab_size = 1

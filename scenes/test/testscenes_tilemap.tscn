@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_wslhl"]
 [ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_eyte7"]
 [ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
-[ext_resource type="PackedScene" path="res://scenes/npc.tscn" id="34_eyte7"]
+[ext_resource type="PackedScene" uid="uid://dd374xusb3il3" path="res://scenes/npc.tscn" id="34_eyte7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")

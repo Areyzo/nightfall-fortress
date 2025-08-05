@@ -6,15 +6,50 @@ extends CharacterBody2D
 var player_inside = false
 var dialogue_instance = null
 var current_dialogue_index = 0
-var dialogues = [
-	"Hi! Seems like you are new here.",
-	"There are lots of monsters at night, be careful!",
-	"Enjoy the game!"
-]
+var dialogues = []
+
+# Different dialogue sets for different NPCs
+var dialogue_sets = {
+	"NPC": [
+		"Hi! Seems like you are new here.",
+		"There are lots of monsters at night, be careful!",
+		"Enjoy the game!"
+	],
+	"NPC2": [
+		"Welcome to our village, traveler!",
+		"I've been expecting someone like you.",
+		"May your journey be filled with adventure!"
+	],
+	"NPC3": [
+		"Greetings, stranger!",
+		"The roads have been dangerous lately.",
+		"Stay safe on your travels!"
+	],
+	"NPC4": [
+		"Well, well, what do we have here?",
+		"You look like you could use some advice.",
+		"Trust no one after midnight!"
+	],
+	"NPC5": [
+		"Hello there, brave soul!",
+		"I can see the determination in your eyes.",
+		"Remember, courage is your greatest weapon!"
+	]
+}
 
 func _ready():
 	print("NPC ready, setting up dialogue system...")
 	add_to_group("npc")  # Add NPC to a group for identification
+	
+	# Set dialogues based on NPC name
+	var npc_name = name
+	if dialogue_sets.has(npc_name):
+		dialogues = dialogue_sets[npc_name]
+		print("Loaded dialogues for: ", npc_name)
+	else:
+		dialogues = dialogue_sets["NPC"]  # Default dialogues
+		print("Using default dialogues for: ", npc_name)
+	
 	if dialogue_trigger:
 		dialogue_trigger.body_entered.connect(_on_body_entered)
 		dialogue_trigger.body_exited.connect(_on_body_exited)

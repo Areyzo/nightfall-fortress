@@ -34,7 +34,9 @@ func _ready():
 	else:
 		print("EnemySpawner found TimeSystem - goblins will only spawn at night (", night_start_hour, ":00 - ", night_end_hour, ":00)")
 	
-	timer.timeout.connect(_on_timer_2_timeout)
+	# Check if signal is already connected before connecting
+	if not timer.timeout.is_connected(_on_timer_2_timeout):
+		timer.timeout.connect(_on_timer_2_timeout)
 
 func find_time_system_in_scene(node: Node) -> TimeSystem:
 	# Recursively search for TimeSystem

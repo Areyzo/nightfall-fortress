@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dm8nscln3p57o"]
+[gd_scene load_steps=24 format=3 uid="uid://dm8nscln3p57o"]
 
 [ext_resource type="Script" uid="uid://drkvnbm6c8uah" path="res://scenes/character/goblin/goblin.gd" id="1_2uai2"]
 [ext_resource type="Texture2D" uid="uid://dgt30q1c0t68h" path="res://scenes/character/goblin/goblin_dead_anim_f0.png" id="1_vh8h2"]
@@ -98,6 +98,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cy02o"]
 size = Vector2(25.5, 24)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(25.5, 24)
+
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -130,8 +133,10 @@ texture_progress = ExtResource("12_vmwq5")
 [node name="Goblinhitbox" type="Area2D" parent="."]
 light_mask = 3
 visibility_layer = 3
+collision_layer = 8
+collision_mask = 4
 
 [node name="hitbox" type="CollisionShape2D" parent="Goblinhitbox"]
 visibility_layer = 3
 position = Vector2(0, 6)
-shape = SubResource("RectangleShape2D_cy02o")
+shape = SubResource("RectangleShape2D_hitbox")

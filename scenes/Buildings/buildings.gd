@@ -10,6 +10,18 @@ signal shoot_projectile
 func _ready() -> void:
 	# Building starts invisible/inactive until selected from menu
 	visible = false
+	print("Building created")
+	
+	# DEBUG: Start timer immediately for testing
+	if $Timer != null:
+		$Timer.start()
+		print("Timer started for testing")
+	
+	# Check collision setup
+	if $Hit_Range != null:
+		print("Hit_Range collision setup: Layer ", $Hit_Range.collision_layer, ", Mask ", $Hit_Range.collision_mask)
+	else:
+		print("ERROR: Hit_Range not found!")
 
 func _process(_delta: float) -> void:  # ✅ _delta to avoid unused warning
 	# Only follow mouse when building is selected for placement and not yet placed
@@ -33,6 +45,9 @@ func _process(_delta: float) -> void:  # ✅ _delta to avoid unused warning
 	
 	# Once placed, handle building logic
 	if placed:
+		# Clean up invalid targets periodically
+		cleanup_invalid_targets()
+		
 		#var damage = 1
 		#health -= damage
 		if health <= 0:
@@ -41,6 +56,25 @@ func _process(_delta: float) -> void:  # ✅ _delta to avoid unused warning
 	if dead:
 		print("Node destroyed.")
 		queue_free()  # Deletes the node safely
+
+func cleanup_invalid_targets():
+	# Remove any freed/destroyed targets from the list
+	var building_range = 108.78  # Match the CircleShape2D radius
+	var building_center = global_position + Vector2(217, 169)  # Match Hit_Range position
+	
+	for i in range(target_within_range.size() - 1, -1, -1):
+		var target = target_within_range[i]
+		
+		# Remove if target is invalid (freed/destroyed)
+		if !is_instance_valid(target):
+			target_within_range.remove_at(i)
+			continue
+			
+		# Remove if target is out of range
+		var distance = building_center.distance_to(target.global_position)
+		if distance > building_range:
+			target_within_range.remove_at(i)
+			print("Removed out-of-range target: ", target.name, " (distance: ", distance, ")")
 
 func _input(event: InputEvent) -> void:
 	# Only handle input when building is being placed
@@ -55,6 +89,12 @@ func _input(event: InputEvent) -> void:
 						print("Building placed")
 						placed = true
 						is_being_placed = false  # Stop following mouse
+						
+						# Start the timer when building is placed
+						if $Timer != null:
+							$Timer.start()
+							print("Timer started for placed building")
+						
 						if $Area2D/Sprite2D != null:
 							$Area2D/Sprite2D.modulate = Color(1, 1, 1, 1)  # Fully visible
 				else:
@@ -62,6 +102,11 @@ func _input(event: InputEvent) -> void:
 					print("Building placed (no collision detection)")
 					placed = true
 					is_being_placed = false  # Stop following mouse
+					
+					# Start the timer when building is placed
+					if $Timer != null:
+						$Timer.start()
+						print("Timer started for placed building")
 
 # Function to be called when building is selected from menu
 func start_placement():
@@ -84,43 +129,118 @@ func _on_hit_range_body_shape_entered(area) -> void:
 	print("Full path:", area.get_path())
 	print("Scene file (if instanced):", area.scene_file_path)
 
-	if area.name.contains("Goblin"):
-		target_within_range.append(area)
+	if area.name.contains("Goblin") and is_instance_valid(area):
+		if area not in target_within_range:  # Prevent duplicates
+			target_within_range.append(area)
 		
 
 func _on_hit_range_area_shape_exited(area) -> void:
-	if "goblin" in area.name and target_within_range.size()>0:
+	if "goblin" in area.name.to_lower() and target_within_range.size() > 0:
 		target_within_range.erase(area)
+		print("Goblin exited building range (shape): ", area.name)
 
 
 func _on_timer_timeout() -> void:
-	if target_within_range.size()>0:
-		var projectile_origin_pos = position + Vector2(32,32)
-		emit_signal("shoot_projectile",projectile_origin_pos,target_within_range[0].position)
+	print("=== TIMER FIRED ===")
+	print("Building placed: ", placed)
+	print("Targets in range: ", target_within_range.size())
+	
+	if target_within_range.size() > 0:
+		print("Found targets, attempting to attack...")
+		
+		# Find the first valid target
+		var target = null
+		
+		for i in range(target_within_range.size()):
+			var potential_target = target_within_range[i]
+			if is_instance_valid(potential_target):
+				target = potential_target
+				break
+		
+		# Clean up invalid targets
+		for i in range(target_within_range.size() - 1, -1, -1):
+			if !is_instance_valid(target_within_range[i]):
+				target_within_range.remove_at(i)
+		
+		# If no valid target found, return
+		if target == null:
+			print("No valid targets found after cleanup")
+			return
+		
+		print("Attacking target: ", target.name)
+		
+		# Use the actual Hit_Range center position from the scene (Vector2(217, 169))
+		var building_center = global_position + Vector2(217, 169)
+		var projectile_origin_pos = building_center
+		
+		# Check if target is still within range before shooting
+		var distance_to_target = building_center.distance_to(target.global_position)
+		var building_range = 108.78
+		
+		print("Target distance: ", distance_to_target, " vs range: ", building_range)
+		
+		if distance_to_target > building_range:
+			target_within_range.erase(target)
+			print("Target out of range, removed")
+			return
+		
+		var target_position = target.global_position
+		
+		print("🔥 FIRING PROJECTILE from ", building_center, " to ", target_position)
+		emit_signal("shoot_projectile", projectile_origin_pos, target_position)
+		print("Signal emitted!")
+	else:
+		print("No targets in range")
 
 
 func _on_hit_range_area_entered(area: Area2D) -> void:
-	print("Entered area node:", area.name)
-
-	 #$Optional: print the full node path or its scene file
-	print("Full path:", area.get_path())
-	print("Scene file (if instanced):", area.scene_file_path)
-
-	if area.name.contains("Goblin"):
-		target_within_range.append(area)
+	print("=== AREA ENTERED ===")
+	print("Area name: ", area.name)
+	var parent_name = "No parent"
+	if area.get_parent():
+		parent_name = area.get_parent().name
+	print("Area parent: ", parent_name)
+	print("Full path: ", area.get_path())
+	print("Area valid: ", is_instance_valid(area))
+	
+	# Check multiple conditions for goblin detection
+	var is_goblin = false
+	if area.name.to_lower().contains("goblin"):
+		is_goblin = true
+		print("✅ Detected goblin by name containing 'goblin'")
+	elif area.name == "Goblinhitbox":
+		is_goblin = true  
+		print("✅ Detected goblin by exact name 'Goblinhitbox'")
+	elif area.get_parent() and area.get_parent().name.to_lower().contains("goblin"):
+		is_goblin = true
+		print("✅ Detected goblin by parent name containing 'goblin'")
+	
+	print("Collision layer check - Area layer: ", area.collision_layer, " Building mask: ", $Hit_Range.collision_mask)
+	
+	if is_goblin and is_instance_valid(area):
+		if area not in target_within_range:  # Prevent duplicates
+			target_within_range.append(area)
+			print("🎯 GOBLIN ADDED TO TARGET LIST! Total targets: ", target_within_range.size())
+		else:
+			print("Goblin already in target list")
+	else:
+		print("❌ Not a goblin or invalid area")
 
 
 func _on_hit_range_area_exited(area: Area2D) -> void:
-	if "goblin" in area.name and target_within_range.size()>0:
+	print("Area exited - Name: ", area.name)
+	if (area.name.contains("Goblin") or area.name.contains("goblin")) and target_within_range.size() > 0:
 		target_within_range.erase(area)
+		print("Goblin exited building range: ", area.name, " Remaining targets: ", target_within_range.size())
 
 
-func _on_hit_range_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_hit_range_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	print("Entered area node:", area.name)
 
 	 #$Optional: print the full node path or its scene file
 	print("Full path:", area.get_path())
 	print("Scene file (if instanced):", area.scene_file_path)
 
-	if area.name.contains("Goblin"):
-		target_within_range.append(area)
+	if area.name.contains("Goblin") and is_instance_valid(area):
+		if area not in target_within_range:  # Prevent duplicates
+			target_within_range.append(area)

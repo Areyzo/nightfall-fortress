@@ -27,14 +27,25 @@ func _on_texture_button_pressed() -> void:
 	print("Created Object: ", obj)
 
 func shoot_projectile(origin , target ):
-	var projectile_instance = projectile.instance()
+	print("=== CREATING PROJECTILE ===")
+	print("shoot_projectile called with origin: ", origin, " target: ", target)
+	var projectile_instance = projectile.instantiate()
+	print("Projectile instantiated: ", projectile_instance)
 	projectile_instance.origin_pos = origin
 	projectile_instance.target_pos = target
-	$entities.add_child(projectile_instance)
+	
+	# Add projectile to the main scene (same level as buildings and goblins)
+	var main_scene = get_tree().current_scene
+	main_scene.add_child(projectile_instance)
+	
+	print("✅ PROJECTILE FIRED from: ", origin, " to: ", target)
 
 func _on_buildings_pressed() -> void:
 	main_button.visible = false
 	hbox.visible = true
 
 func _on_shoot_projectile(origin, target):
+	print("=== SIGNAL RECEIVED ===")
+	print("Building system received shoot_projectile signal!")
+	print("Origin: ", origin, " Target: ", target)
 	shoot_projectile(origin, target)

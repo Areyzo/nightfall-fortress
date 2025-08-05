@@ -62,7 +62,7 @@ func show_popup_message(message: String):
 	
 	print("Popup message: ", message)
 
-func check_stone_requirement() -> bool:
+func check_stone_requirement(stones_needed: int = 7) -> bool:
 	if not player_node:
 		return false
 	
@@ -80,10 +80,10 @@ func check_stone_requirement() -> bool:
 					if "amount" in slot:
 						stone_count += slot.amount
 	
-	print("Stones available: ", stone_count)
-	return stone_count >= 7  # Need at least 7 stones
+	print("Stones available: ", stone_count, ", needed: ", stones_needed)
+	return stone_count >= stones_needed
 
-func consume_stone() -> bool:
+func consume_stone(stones_to_consume: int = 7) -> bool:
 	if not player_node:
 		return false
 	
@@ -91,8 +91,7 @@ func consume_stone() -> bool:
 	if not inventory:
 		return false
 	
-	# Find and consume 7 stones
-	var stones_to_consume = 7
+	# Find and consume stones
 	var consumed = 0
 	
 	if "slots" in inventory and inventory.slots:
@@ -101,7 +100,6 @@ func consume_stone() -> bool:
 				if "name" in slot.item and slot.item.name == "stone":
 					if "amount" in slot and slot.amount > 0:
 						var take_amount = min(slot.amount, stones_to_consume - consumed)
-						slot.amount -= take_amount
 						slot.amount -= take_amount
 						consumed += take_amount
 						
@@ -173,9 +171,22 @@ func _on_shoot_projectile(origin, target):
 
 
 func _on_texture_button_2_pressed() -> void:
+	# Check if player has 2 stones for building1
+	if not check_stone_requirement(2):
+		show_popup_message("Need 2 stones to place building!")
+		return
+	
+	# Consume the stones
+	if not consume_stone(2):
+		show_popup_message("Failed to consume stones!")
+		return
+	
+	# Place the building
 	main_button.visible = true
 	hbox.visible = false
-	print("texture pressed")
+	show_popup_message("Building placed! 2 stones consumed.")
+	
+	print("Building1 placed")
 	var obj = building.instantiate()
 	obj.shoot_projectile.connect(self._on_shoot_projectile)
 	target_sibling.add_child(obj)
@@ -185,9 +196,22 @@ func _on_texture_button_2_pressed() -> void:
 
 
 func _on_texture_button_3_pressed() -> void:
+	# Check if player has 2 stones for building2
+	if not check_stone_requirement(2):
+		show_popup_message("Need 2 stones to place building!")
+		return
+	
+	# Consume the stones
+	if not consume_stone(2):
+		show_popup_message("Failed to consume stones!")
+		return
+	
+	# Place the building
 	main_button.visible = true
 	hbox.visible = false
-	print("texture pressed")
+	show_popup_message("Building placed! 2 stones consumed.")
+	
+	print("Building2 placed")
 	var obj = building1.instantiate()
 	obj.shoot_projectile.connect(self._on_shoot_projectile)
 	target_sibling.add_child(obj)

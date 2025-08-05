@@ -83,6 +83,48 @@ func check_stone_requirement(stones_needed: int = 7) -> bool:
 	print("Stones available: ", stone_count, ", needed: ", stones_needed)
 	return stone_count >= stones_needed
 
+func check_arrow_requirement(arrows_needed: int = 5) -> bool:
+	if not player_node:
+		return false
+	
+	var inventory = player_node.get_inventory()
+	if not inventory:
+		print("No inventory found!")
+		return false
+	
+	# Check for arrows in inventory
+	var arrow_count = 0
+	if "slots" in inventory and inventory.slots:
+		for slot in inventory.slots:
+			if slot != null and "item" in slot and slot.item != null:
+				if "name" in slot.item and slot.item.name == "arrow":
+					if "amount" in slot:
+						arrow_count += slot.amount
+	
+	print("Arrows available: ", arrow_count, ", needed: ", arrows_needed)
+	return arrow_count >= arrows_needed
+
+func check_wood_requirement(wood_needed: int = 1) -> bool:
+	if not player_node:
+		return false
+	
+	var inventory = player_node.get_inventory()
+	if not inventory:
+		print("No inventory found!")
+		return false
+	
+	# Check for wood/log in inventory
+	var wood_count = 0
+	if "slots" in inventory and inventory.slots:
+		for slot in inventory.slots:
+			if slot != null and "item" in slot and slot.item != null:
+				if "name" in slot.item and (slot.item.name == "wood" or slot.item.name == "log"):
+					if "amount" in slot:
+						wood_count += slot.amount
+	
+	print("Wood/Log available: ", wood_count, ", needed: ", wood_needed)
+	return wood_count >= wood_needed
+
 func consume_stone(stones_to_consume: int = 7) -> bool:
 	if not player_node:
 		return false
@@ -123,21 +165,109 @@ func consume_stone(stones_to_consume: int = 7) -> bool:
 		print("Failed to consume enough stones. Only consumed: ", consumed)
 		return false
 
+func consume_arrow(arrows_to_consume: int = 5) -> bool:
+	if not player_node:
+		return false
+	
+	var inventory = player_node.get_inventory()
+	if not inventory:
+		return false
+	
+	# Find and consume arrows
+	var consumed = 0
+	
+	if "slots" in inventory and inventory.slots:
+		for slot in inventory.slots:
+			if slot != null and "item" in slot and slot.item != null:
+				if "name" in slot.item and slot.item.name == "arrow":
+					if "amount" in slot and slot.amount > 0:
+						var take_amount = min(slot.amount, arrows_to_consume - consumed)
+						slot.amount -= take_amount
+						consumed += take_amount
+						
+						print("Consumed ", take_amount, " arrows from slot. Slot remaining: ", slot.amount)
+						
+						# Remove slot if empty
+						if slot.amount <= 0:
+							var slot_index = inventory.slots.find(slot)
+							if slot_index != -1:
+								inventory.slots[slot_index] = null
+						
+						# Stop if we've consumed enough
+						if consumed >= arrows_to_consume:
+							break
+	
+	if consumed >= arrows_to_consume:
+		inventory.updated.emit()  # Update inventory UI
+		print("Successfully consumed ", consumed, " arrows!")
+		return true
+	else:
+		print("Failed to consume enough arrows. Only consumed: ", consumed)
+		return false
+
+func consume_wood(wood_to_consume: int = 1) -> bool:
+	if not player_node:
+		return false
+	
+	var inventory = player_node.get_inventory()
+	if not inventory:
+		return false
+	
+	# Find and consume wood/log
+	var consumed = 0
+	
+	if "slots" in inventory and inventory.slots:
+		for slot in inventory.slots:
+			if slot != null and "item" in slot and slot.item != null:
+				if "name" in slot.item and (slot.item.name == "wood" or slot.item.name == "log"):
+					if "amount" in slot and slot.amount > 0:
+						var take_amount = min(slot.amount, wood_to_consume - consumed)
+						slot.amount -= take_amount
+						consumed += take_amount
+						
+						print("Consumed ", take_amount, " wood/log from slot. Slot remaining: ", slot.amount)
+						
+						# Remove slot if empty
+						if slot.amount <= 0:
+							var slot_index = inventory.slots.find(slot)
+							if slot_index != -1:
+								inventory.slots[slot_index] = null
+						
+						# Stop if we've consumed enough
+						if consumed >= wood_to_consume:
+							break
+	
+	if consumed >= wood_to_consume:
+		inventory.updated.emit()  # Update inventory UI
+		print("Successfully consumed ", consumed, " wood/log!")
+		return true
+	else:
+		print("Failed to consume enough wood/log. Only consumed: ", consumed)
+		return false
+
 func _on_texture_button_pressed() -> void:
-	# Check if player has stones
-	if not check_stone_requirement():
-		show_popup_message("Need 7 stones to place building!")
+	# Check if player has 7 stones and 5 arrows
+	if not check_stone_requirement(7):
+		show_popup_message("Need 7 stones and 5 arrows to place building!")
 		return
 	
-	# Consume the stones
-	if not consume_stone():
+	if not check_arrow_requirement(5):
+		show_popup_message("Need 7 stones and 5 arrows to place building!")
+		return
+	
+	# Consume the resources
+	if not consume_stone(7):
 		show_popup_message("Failed to consume stones!")
+		return
+	
+	if not consume_arrow(5):
+		show_popup_message("Failed to consume arrows!")
 		return
 	
 	# Place the building
 	main_button.visible = true
 	hbox.visible = false
-	show_popup_message("Building placed! 7 stones consumed.")
+	show_popup_message("Building placed! 7 stones and 5 arrows consumed.")
 	
 	var obj = ObjectScene.instantiate()
 	obj.shoot_projectile.connect(self._on_shoot_projectile)
@@ -171,20 +301,28 @@ func _on_shoot_projectile(origin, target):
 
 
 func _on_texture_button_2_pressed() -> void:
-	# Check if player has 2 stones for building1
-	if not check_stone_requirement(2):
-		show_popup_message("Need 2 stones to place building!")
+	# Check if player has 4 stones and 2 arrows for building1
+	if not check_stone_requirement(4):
+		show_popup_message("Need 4 stones and 2 arrows to place building!")
 		return
 	
-	# Consume the stones
-	if not consume_stone(2):
+	if not check_arrow_requirement(2):
+		show_popup_message("Need 4 stones and 2 arrows to place building!")
+		return
+	
+	# Consume the resources
+	if not consume_stone(4):
 		show_popup_message("Failed to consume stones!")
+		return
+	
+	if not consume_arrow(2):
+		show_popup_message("Failed to consume arrows!")
 		return
 	
 	# Place the building
 	main_button.visible = true
 	hbox.visible = false
-	show_popup_message("Building placed! 2 stones consumed.")
+	show_popup_message("Building placed! 4 stones and 2 arrows consumed.")
 	
 	print("Building1 placed")
 	var obj = building.instantiate()
@@ -196,20 +334,36 @@ func _on_texture_button_2_pressed() -> void:
 
 
 func _on_texture_button_3_pressed() -> void:
-	# Check if player has 2 stones for building2
-	if not check_stone_requirement(2):
-		show_popup_message("Need 2 stones to place building!")
+	# Check if player has 1 wood, 1 stone, and 2 arrows for building2
+	if not check_wood_requirement(1):
+		show_popup_message("Need 1 wood, 1 stone, and 2 arrows to place building!")
 		return
 	
-	# Consume the stones
-	if not consume_stone(2):
-		show_popup_message("Failed to consume stones!")
+	if not check_stone_requirement(1):
+		show_popup_message("Need 1 wood, 1 stone, and 2 arrows to place building!")
+		return
+	
+	if not check_arrow_requirement(2):
+		show_popup_message("Need 1 wood, 1 stone, and 2 arrows to place building!")
+		return
+	
+	# Consume the resources
+	if not consume_wood(1):
+		show_popup_message("Failed to consume wood!")
+		return
+	
+	if not consume_stone(1):
+		show_popup_message("Failed to consume stone!")
+		return
+	
+	if not consume_arrow(2):
+		show_popup_message("Failed to consume arrows!")
 		return
 	
 	# Place the building
 	main_button.visible = true
 	hbox.visible = false
-	show_popup_message("Building placed! 2 stones consumed.")
+	show_popup_message("Building placed! 1 wood, 1 stone, and 2 arrows consumed.")
 	
 	print("Building2 placed")
 	var obj = building1.instantiate()

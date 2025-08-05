@@ -2,6 +2,8 @@ extends Node2D
 
 var objects: Array = []  # To track instanced objects
 var ObjectScene: PackedScene = preload("res://scenes/Buildings/buildings.tscn")  # Update path if needed
+var building : PackedScene = preload("res://scenes/Buildings/building1.tscn")
+var building1 : PackedScene = preload("res://scenes/Buildings/building2.tscn")
 
 @onready var main_button = $Buildings
 @onready var hbox = $Control
@@ -24,10 +26,8 @@ func _on_texture_button_pressed() -> void:
 	# Call start_placement() to make the building follow mouse cursor
 	obj.start_placement()
 	objects.append(obj)
-	print("Created Object: ", obj)
 
 func shoot_projectile(origin , target ):
-	print("=== CREATING PROJECTILE ===")
 	print("shoot_projectile called with origin: ", origin, " target: ", target)
 	var projectile_instance = projectile.instantiate()
 	print("Projectile instantiated: ", projectile_instance)
@@ -38,7 +38,7 @@ func shoot_projectile(origin , target ):
 	var main_scene = get_tree().current_scene
 	main_scene.add_child(projectile_instance)
 	
-	print("✅ PROJECTILE FIRED from: ", origin, " to: ", target)
+	print(" PROJECTILE FIRED from: ", origin, " to: ", target)
 
 func _on_buildings_pressed() -> void:
 	main_button.visible = false
@@ -49,3 +49,27 @@ func _on_shoot_projectile(origin, target):
 	print("Building system received shoot_projectile signal!")
 	print("Origin: ", origin, " Target: ", target)
 	shoot_projectile(origin, target)
+
+
+func _on_texture_button_2_pressed() -> void:
+	main_button.visible = true
+	hbox.visible = false
+	print("texture pressed")
+	var obj = building.instantiate()
+	obj.shoot_projectile.connect(self._on_shoot_projectile)
+	target_sibling.add_child(obj)
+	# Call start_placement() to make the building follow mouse cursor
+	obj.start_placement()
+	objects.append(obj)
+
+
+func _on_texture_button_3_pressed() -> void:
+	main_button.visible = true
+	hbox.visible = false
+	print("texture pressed")
+	var obj = building1.instantiate()
+	obj.shoot_projectile.connect(self._on_shoot_projectile)
+	target_sibling.add_child(obj)
+	# Call start_placement() to make the building follow mouse cursor
+	obj.start_placement()
+	objects.append(obj)

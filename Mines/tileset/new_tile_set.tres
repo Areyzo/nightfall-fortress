@@ -335,7 +335,6 @@ texture = ExtResource("3_m16im")
 18:3/0 = 0
 19:3/0 = 0
 21:3/0 = 0
-1:4/0 = 0
 2:4/0 = 0
 3:4/0 = 0
 4:4/0 = 0
@@ -379,6 +378,7 @@ texture = ExtResource("3_m16im")
 18:6/0 = 0
 19:6/0 = 0
 21:6/0 = 0
+1:4/0 = 0
 
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_bylqb")

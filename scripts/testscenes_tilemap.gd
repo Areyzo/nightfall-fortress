@@ -200,3 +200,4 @@ func join():
 	print("join")
 	%multiplayerHUD.hide()
 	MultiplayerManager.join_as_player()
+	

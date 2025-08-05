@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dd36v0kcxr1wi"]
+[gd_scene load_steps=6 format=3 uid="uid://dd36v0kcxr1wi"]
 
 [ext_resource type="Texture2D" uid="uid://dyqn6ic756vep" path="res://fonts/HS.png" id="1_7vrkn"]
 [ext_resource type="Script" uid="uid://c2w88tx2cf2kq" path="res://scripts/main_menu.gd" id="1_nlkkf"]
 [ext_resource type="FontFile" uid="uid://cgr6hmo32ykru" path="res://fonts/DePixelHalbfett.otf" id="2_fu7sn"]
-[ext_resource type="Script" uid="uid://bed05geu684a4" path="res://scripts/play.gd" id="4_qe12f"]
-[ext_resource type="Script" uid="uid://bouiy7ldnrrbx" path="res://scripts/options.gd" id="5_8qtwp"]
-[ext_resource type="Script" uid="uid://c63lvfepu3pr4" path="res://scripts/exit.gd" id="6_dy7ct"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jix8l"]
 texture = ExtResource("1_7vrkn")
@@ -53,17 +50,6 @@ theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
 text = "Start game"
-script = ExtResource("4_qe12f")
-
-[node name="Options" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_fu7sn")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
-text = "Options"
-script = ExtResource("5_8qtwp")
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -73,7 +59,6 @@ theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
 text = "Exit"
-script = ExtResource("6_dy7ct")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -207,7 +192,6 @@ theme_override_font_sizes/font_size = 24
 text = "×"
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="value_changed" from="OptionsPopup/OptionsPanel/VBoxContainer/VolumeContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="toggled" from="OptionsPopup/OptionsPanel/VBoxContainer/MuteButton" to="." method="_on_mute_button_toggled"]

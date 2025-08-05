@@ -94,4 +94,5 @@ func load_audio_settings():
 		print("No saved audio settings found, using defaults")
 
 func _on_exit_pressed() -> void:
+	print("=== EXIT BUTTON PRESSED ===")
 	get_tree().quit()

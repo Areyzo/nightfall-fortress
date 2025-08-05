@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddh3qrn5kwdh5"]
+
+[ext_resource type="PackedScene" uid="uid://cinp64ka7sstc" path="res://scenes/collectables/collectables.tscn" id="1_4fkr2"]
+[ext_resource type="Texture2D" uid="uid://dxfnpm1e1bc88" path="res://assets/game/Objects/log.png" id="2_hdfro"]
+[ext_resource type="Resource" uid="uid://bfx8n9k2m5j7w" path="res://scripts/inventory/items/log.tres" id="2_wcjmf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfeua"]
+resource_local_to_scene = true
+size = Vector2(14, 14)
+
+[node name="Collectables" instance=ExtResource("1_4fkr2")]
+itemsRes = ExtResource("2_wcjmf")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_cfeua")
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_hdfro")

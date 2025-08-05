@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=57 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_wslhl"]
 [ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_eyte7"]
 [ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
-[ext_resource type="AudioStream" uid="uid://dv0i73c788b3q" path="res://assets/The Legend of Zelda Breath of the Wild Korok Forest (Day).mp3" id="34_eyte7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")
@@ -2776,12 +2775,6 @@ texture = ExtResource("32_eyte7")
 [node name="Crane" type="Sprite2D" parent="."]
 position = Vector2(1253, 279)
 texture = ExtResource("33_kymrb")
-
-[node name="MusicPlayer" type="Node" parent="."]
-
-[node name="BGM" type="AudioStreamPlayer2D" parent="MusicPlayer"]
-stream = ExtResource("34_eyte7")
-autoplay = true
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]

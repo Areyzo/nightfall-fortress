@@ -1,4 +1,4 @@
-[gd_scene load_steps=0 format=3 uid="uid://dutnx2d72qs73"]
+[gd_scene format=3 uid="uid://dutnx2d72qs73"]
 
 [node name="Log" type="Node2D"]
 

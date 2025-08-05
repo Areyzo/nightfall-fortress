@@ -34,6 +34,8 @@ func _on_texture_button_pressed() -> void:
 	print("texture pressed")
 	var obj = ObjectScene.instantiate()
 	target_sibling.add_child(obj)
+	# Call start_placement() to make the building follow mouse cursor
+	obj.start_placement()
 	objects.append(obj)
 	print("Created Object: ", obj)
 

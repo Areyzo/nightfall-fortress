@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=59 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
 [ext_resource type="PackedScene" uid="uid://cufd3m0el2idc" path="res://scenes/chest/chest.tscn" id="34_eyte7"]
 [ext_resource type="PackedScene" uid="uid://dd374xusb3il3" path="res://scenes/npc.tscn" id="35_npc"]
+[ext_resource type="PackedScene" uid="uid://bdjhg7l0r4xyv" path="res://scenes/ui/game_over_screen.tscn" id="36_game_over"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")
@@ -2792,6 +2793,8 @@ layout_mode = 2
 [node name="SaveAndExitButton" type="Button" parent="CanvasLayer/EscMenu/MenuPanel/VBoxContainer"]
 layout_mode = 2
 text = "Save & Exit"
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("36_game_over")]
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." node_paths=PackedStringArray("time_system")]
 blend_mode = 2

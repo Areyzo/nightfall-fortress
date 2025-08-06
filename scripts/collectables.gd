@@ -3,7 +3,13 @@ extends Area2D
 
 func _ready():
 	connect("body_entered", _on_body_entered)
-	print("Collectables ready. ItemsRes: ", itemsRes.name if itemsRes else "NULL")
+	print("=== COLLECTABLES READY ===")
+	print("Position: ", global_position)
+	print("ItemsRes: ", itemsRes.name if itemsRes else "NULL")
+	if itemsRes:
+		print("ItemsRes name: ", itemsRes.name)
+		print("ItemsRes texture: ", itemsRes.texture)
+	print("===========================")
 
 func _on_body_entered(body):
 	print("=== COLLECTABLES: Body entered ===")

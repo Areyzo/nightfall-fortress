@@ -22,12 +22,16 @@ func _death():
 	# Spawn wood at death position
 	if not item_dropped:
 		item_dropped = true
-		var target_node = get_parent().get_parent().get_node("Gametilemap/collectables")
+		print("Spawning log at position: ", position)
+		
+		# Get the main scene root node
+		var main_scene = get_tree().current_scene
 		var wood_instance = wood_scene.instantiate()
-		wood_instance.position = position
-		target_node.add_child(wood_instance)
+		wood_instance.position = global_position
+		print("Adding log to main scene")
+		main_scene.add_child(wood_instance)
+		print("Log spawned successfully!")
 
-	
 	await get_tree().create_timer(3.0).timeout
 	queue_free()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=61 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://cufd3m0el2idc" path="res://scenes/chest/chest.tscn" id="34_eyte7"]
 [ext_resource type="PackedScene" uid="uid://dd374xusb3il3" path="res://scenes/npc.tscn" id="35_npc"]
 [ext_resource type="PackedScene" uid="uid://bdjhg7l0r4xyv" path="res://scenes/ui/game_over_screen.tscn" id="36_game_over"]
+[ext_resource type="PackedScene" uid="uid://d4m6spx3ttin6" path="res://scenes/female_npc.tscn" id="37_42smm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")
@@ -2806,8 +2807,10 @@ night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
+position = Vector2(100, 120)
 
 [node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
+position = Vector2(0, 200)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("15_aoqbf")]
 script = ExtResource("16_jxchy")
@@ -2825,7 +2828,7 @@ gizmo_extents = 0.0
 position = Vector2(400, 0)
 
 [node name="SpawnPoint4" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2(20, 0)
+position = Vector2(20, 60)
 
 [node name="Timer2" type="Timer" parent="EnemySpawner"]
 wait_time = 5.0
@@ -2898,6 +2901,15 @@ position = Vector2(2259, -37)
 
 [node name="NPC5" parent="." instance=ExtResource("35_npc")]
 position = Vector2(2161, 232)
+
+[node name="FemaleNPC" parent="." instance=ExtResource("37_42smm")]
+position = Vector2(1843, -1)
+
+[node name="FemaleNPC2" parent="." instance=ExtResource("37_42smm")]
+position = Vector2(1062, 276)
+
+[node name="FemaleNPC3" parent="." instance=ExtResource("37_42smm")]
+position = Vector2(1356, 358)
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]

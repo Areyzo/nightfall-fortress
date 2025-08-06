@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bos1rp58kj7ba"]
+[gd_scene load_steps=13 format=4 uid="uid://bos1rp58kj7ba"]
 
 [ext_resource type="TileSet" uid="uid://dertqu87pmorx" path="res://Mines/tileset/new_tile_set.tres" id="1_qsf0h"]
 [ext_resource type="PackedScene" uid="uid://cgeugay17yf8h" path="res://scenes/test/portal.tscn" id="2_qsf0h"]
@@ -10,6 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://g1us7ynty7cv" path="res://scenes/character/caveslime_horizontal/slime_horizontal.tscn" id="7_r010t"]
 [ext_resource type="PackedScene" uid="uid://v2gj4mb3ok4c" path="res://scenes/inventory/hotbar.tscn" id="7_rof45"]
 [ext_resource type="PackedScene" uid="uid://cufd3m0el2idc" path="res://scenes/chest/chest.tscn" id="10_l7hgw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l7hgw"]
+radius = 7.07107
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7hgw"]
 
 [node name="TestWorld" type="Node2D"]
 position = Vector2(226, 222)
@@ -58,7 +63,8 @@ position = Vector2(100, 60)
 position = Vector2(160, -160)
 
 [node name="slime_diagonal2" parent="." instance=ExtResource("4_k3yvu")]
-position = Vector2(240, -10)
+position = Vector2(240, -9.83333)
+scale = Vector2(1.03659, 1.05556)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -98,5 +104,102 @@ position = Vector2(207, 104)
 
 [node name="chest3" parent="." instance=ExtResource("10_l7hgw")]
 position = Vector2(-189, 43)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-224, -25, -225, 31, -206, 33, -206, 65, -191, 65, -192, 81, -177, 81, -175, 129, -100, 129, -94, 157, -80, 160, -76, 191, 140, 194, 144, 160, 192, 157, 193, 145, 208, 140, 224, 113, 254, 113, 257, 81, 332, 79, 336, 65, 354, 66, 353, 29, 383, 31, 385, 1, 404, -3, 402, -15, 414, -17, 416, -64, 419, -74, 400, -91, 402, -114, 417, -115, 418, -175, 417, -204, 403, -212, 327, -210, 113, -209, -109, -209, -124, -209, -122, -239, -152, -245, -173, -244, -165, -214, -206, -212, -193, -210, -193, -186, -227, -179, -226, -28, -417, -37, -407, -361, 275, -436, 551, -316, 548, 33, 402, 238, 57, 307, -223, 295, -419, -34)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-119, 54)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-138, 7)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-217, 7)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-200, -104)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-217, -56)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-169, -23)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-71, -167)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-217, -137)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-200, -123)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-200, -167)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(344, -200)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(198, 133)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(184, 152)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(358, 23)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(358, 6)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(376, 6)
+shape = SubResource("CircleShape2D_l7hgw")
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-32, 159)
+shape = SubResource("RectangleShape2D_l7hgw")
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 159)
+shape = SubResource("RectangleShape2D_l7hgw")
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(48, 145)
+shape = SubResource("RectangleShape2D_l7hgw")
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(48, 145)
+shape = SubResource("RectangleShape2D_l7hgw")
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(94, 145)
+shape = SubResource("RectangleShape2D_l7hgw")
+
+[node name="CollisionShape2D22" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(160, 128)
+shape = SubResource("RectangleShape2D_l7hgw")
+
+[node name="CollisionShape2D23" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(305, 50)
+shape = SubResource("RectangleShape2D_l7hgw")
 
 [editable path="Portal/Portal"]

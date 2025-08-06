@@ -13,6 +13,15 @@ func _ready():
 	if esc_menu:
 		esc_menu.hide()
 		
+	# Check if player died in cave and needs to respawn here
+	if GlobalData.respawn_in_main_world:
+		print("=== HANDLING CAVE DEATH RESPAWN ===")
+		print("Player died in cave, respawning in main world")
+		# Give the scene time to fully load
+		await get_tree().process_frame
+		handle_cave_death_respawn()
+		return
+		
 	# Initialize game over screen - find it manually to avoid @onready issues
 	game_over_screen = get_node_or_null("CanvasLayer/GameOverScreen")
 	if game_over_screen:
@@ -253,6 +262,36 @@ func join():
 	print("join")
 	%multiplayerHUD.hide()
 	MultiplayerManager.join_as_player()
+
+func handle_cave_death_respawn():
+	print("=== HANDLING CAVE DEATH RESPAWN ===")
+	print("Respawning player after cave death")
+	
+	if not player:
+		print("ERROR: Player not found for cave death respawn!")
+		GlobalData.respawn_in_main_world = false
+		GlobalData.died_in_cave = false
+		return
+	
+	# Use stored spawn position if available, otherwise use current spawn point
+	var respawn_pos = GlobalData.main_world_spawn_position
+	if respawn_pos == Vector2.ZERO and player_spawn_position != Vector2.ZERO:
+		respawn_pos = player_spawn_position
+	elif respawn_pos == Vector2.ZERO:
+		respawn_pos = Vector2(100, 100)  # Fallback position
+		
+	print("Cave death respawn position: ", respawn_pos)
+	
+	# Respawn the player
+	player.global_position = respawn_pos
+	player.respawn()  # This will restore health and reset inventory
+	
+	# Clear the cave death flags
+	GlobalData.respawn_in_main_world = false
+	GlobalData.died_in_cave = false
+	GlobalData.main_world_spawn_position = Vector2.ZERO
+	
+	print("Cave death respawn complete!")
 
 func _on_player_died():
 	"""Handle player death - show game over screen and clear inventory"""

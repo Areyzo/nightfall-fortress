@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://jvwawdy57l7d"]
+[gd_scene load_steps=58 format=4 uid="uid://jvwawdy57l7d"]
 
 [ext_resource type="Script" uid="uid://cfqjpaok7u0tl" path="res://scripts/testscenes_tilemap.gd" id="1_2vhog"]
 [ext_resource type="Texture2D" uid="uid://dnkwxlwan0oi0" path="res://assets/game/Tilesets/Water.png" id="1_lufok"]
@@ -33,8 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://c41ecpolqkw8j" path="res://assets/additional assets/vehicle/Boat.png" id="31_wslhl"]
 [ext_resource type="Texture2D" uid="uid://dru8a8k1vbh1q" path="res://assets/additional assets/vehicle/Sail.png" id="32_eyte7"]
 [ext_resource type="Texture2D" uid="uid://d1h5qvs3t31hj" path="res://assets/additional assets/vehicle/Crane.png" id="33_kymrb"]
-[ext_resource type="PackedScene" uid="uid://dd374xusb3il3" path="res://scenes/npc.tscn" id="34_eyte7"]
-[ext_resource type="PackedScene" uid="uid://bdjhg7l0r4xyv" path="res://scenes/ui/game_over_screen.tscn" id="35_game_over"]
+[ext_resource type="PackedScene" uid="uid://cufd3m0el2idc" path="res://scenes/chest/chest.tscn" id="34_eyte7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic0xw"]
 texture = ExtResource("2_yumbo")
@@ -2591,6 +2590,9 @@ light_mask = 31
 visibility_layer = 31
 polygon = PackedVector2Array(-61, 650, -62, 592, -62, 355, -62, -55, -56, -62, 16, -62, 112, -62, 662, -62, 1058, -62, 1064, -62, 1070, -56, 1070, 8, 1070, 145, 1071, 146, 1080, 146, 1086, 152, 1086, 160, 1232, 160, 1240, 162, 1242, 171, 1252, 178, 1270, 177, 1272, 175, 1272, 162, 1286, 161, 1288, 159, 1288, 146, 1290, 146, 1293, 145, 1298, 145, 1302, 145, 1304, 143, 1304, 114, 1304, 79, 1308, 79, 1312, 77, 1312, 74, 1328, 74, 1328, 77, 1332, 79, 1339, 79, 1344, 75, 1344, 70, 1343, 61, 1342, 51, 1341, 42, 1343, 35, 1343, 4, 1352, 4, 1353, 14, 1355, 16, 1479, 16, 1480, -68, 1488, -81, 1488, -95, 1521, -94, 1520, -53, 1525, -49, 1532, -49, 1536, -51, 1536, -54, 1552, -54, 1552, -50, 1556, -49, 1562, -49, 1568, -53, 1568, -58, 1565, -82, 1577, -78, 1612, -78, 1624, -81, 1624, -75, 1629, -66, 1642, -62, 1671, -62, 1676, -50, 1681, -49, 1690, -46, 1698, -48, 1729, -49, 1774, -50, 1791, -49, 1778, -43, 1781, -32, 1818, -31, 1823, -39, 1822, -50, 1840, -52, 1850, -26, 1864, -22, 1865, 50, 1865, 84, 1856, 87, 1851, 97, 1848, 115, 1852, 127, 1866, 130, 1864, 179, 1864, 211, 1856, 213, 1851, 223, 1849, 233, 1849, 243, 1837, 249, 1834, 264, 1832, 277, 1838, 286, 1836, 291, 1832, 297, 1832, 301, 1837, 299, 1832, 305, 1832, 310, 1833, 312, 1839, 312, 1843, 317, 1847, 319, 1847, 326, 1850, 328, 1855, 325, 1855, 327, 1862, 336, 1869, 333, 1874, 331, 1887, 330, 1891, 334, 1896, 334, 1903, 331, 1910, 329, 1913, 321, 1921, 321, 1922, 329, 1923, 332, 1932, 336, 1956, 336, 1966, 331, 1964, 287, 1968, 281, 1967, 271, 1960, 255, 1976, 253, 1976, 241, 1958, 221, 1960, 207, 1972, 208, 1980, 200, 1991, 200, 1992, 190, 2007, 190, 2008, 173, 1976, 168, 1958, 125, 1970, 105, 1972, 85, 1929, 81, 1952, 59, 1962, 41, 1945, 33, 1923, 36, 1913, 31, 1912, -16, 1988, -15, 2013, -19, 2025, -32, 2050, -32, 2049, -19, 2062, -19, 2063, -33, 2133, -33, 2136, -38, 2136, -49, 2192, -49, 2203, -45, 2210, -49, 2239, -51, 2240, -46, 2270, -46, 2279, -46, 2279, -27, 2290, -24, 2328, -23, 2329, -11, 2331, -8, 2353, -7, 2353, -3, 2366, -1, 2367, 19, 2334, 19, 2329, 28, 2329, 40, 2341, 47, 2346, 56, 2359, 64, 2374, 57, 2384, 44, 2384, 112, 2346, 112, 2345, 134, 2302, 127, 2302, 78, 2281, 65, 2258, 77, 2259, 102, 2258, 131, 2231, 129, 2205, 147, 2201, 154, 2203, 167, 2219, 179, 2219, 192, 2225, 199, 2239, 199, 2246, 191, 2272, 185, 2280, 175, 2328, 177, 2328, 197, 2331, 201, 2371, 202, 2384, 206, 2385, 231, 2355, 232, 2352, 257, 2144, 257, 2143, 235, 2142, 233, 2133, 233, 2127, 232, 2128, 93, 2141, 94, 2145, 82, 2178, 80, 2191, 75, 2189, 45, 2168, 33, 2150, 42, 2143, 41, 2144, -6, 2141, -8, 2098, -8, 2096, -5, 2097, 35, 2073, 36, 2073, 77, 2075, 79, 2096, 80, 2099, 87, 2111, 87, 2112, 153, 2089, 152, 2089, 167, 2088, 196, 2088, 232, 2089, 243, 2091, 247, 2097, 247, 2097, 266, 2073, 265, 2073, 295, 2080, 295, 2082, 300, 2083, 302, 2093, 302, 2096, 304, 2096, 324, 2099, 327, 2142, 327, 2144, 304, 2352, 304, 2353, 325, 2355, 327, 2396, 328, 2400, 323, 2400, 229, 2400, 8, 2401, 22, 2416, 22, 2417, -34, 2434, -36, 2439, -45, 2435, -56, 2426, -61, 2425, -65, 2451, -67, 2455, -79, 2476, -78, 2503, -81, 2520, -91, 2526, -84, 2552, -78, 2578, -81, 2621, -80, 2633, -94, 2648, -95, 2650, -88, 2656, -82, 2676, -80, 2696, -80, 2712, -90, 2712, -93, 2727, -96, 2730, -86, 2740, -79, 2757, -79, 2777, -82, 2798, -80, 2827, -83, 2843, -90, 2863, -95, 2850, -92, 2849, -82, 2848, 81, 2848, 174, 2848, 359, 2847, 648, 2847, 1051, 2849, 1482, 2848, 1872, 2547, 1873, 2076, 1876, 1505, 1889, 951, 1884, 556, 1875, 127, 1877, -211, 1872, -212, 1405, -210, 1146, 144, 1151, 666, 1150, 1190, 1150, 1294, 1149, 1296, 818, 1297, 515, 1292, 323, 1295, 303, 1361, 335, 1412, 352, 1447, 370, 1506, 386, 1574, 398, 1654, 415, 1825, 415, 1832, 404, 1804, 380, 1819, 373, 1808, 358, 1770, 339, 1728, 323, 1720, 336, 1696, 326, 1678, 324, 1674, 339, 1655, 342, 1651, 327, 1633, 322, 1542, 307, 1511, 306, 1488, 310, 1464, 291, 1430, 289, 1428, 280, 1414, 275, 1398, 275, 1386, 285, 1385, 292, 1379, 285, 1377, 279, 1366, 273, 1363, 267, 1358, 262, 1351, 259, 1345, 259, 1339, 267, 1336, 273, 1336, 260, 1329, 248, 1324, 242, 1318, 239, 1312, 231, 1304, 227, 1296, 228, 1293, 231, 1287, 239, 1279, 232, 1269, 228, 1258, 233, 1258, 247, 1253, 260, 1242, 261, 1236, 265, 1238, 278, 1237, 286, 1228, 287, 1209, 285, 1086, 288, 1085, 298, 1069, 301, 1092, 317, 1070, 307, 1070, 367, 1068, 651, 756, 656, 447, 653, 138, 655, -32, 654, -59, 652, -64, 669, -117, 677, -194, 728, -366, 842, -343, 1042, -776, 1359, -765, 2301, 1312, 2308, 3226, 2316, 3234, -118, 2863, -193, 1250, -189, -834, -172, -813, 1277, -503, 993, -471, 734)
 
+[node name="chest" parent="Gametilemap" instance=ExtResource("34_eyte7")]
+position = Vector2(1042, 112)
+
 [node name="trees" type="Node" parent="."]
 
 [node name="tree9" parent="trees" instance=ExtResource("8_t3nim")]
@@ -2727,8 +2729,6 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("35_game_over")]
-
 [node name="EscMenu" type="Control" parent="CanvasLayer"]
 visible = false
 layout_mode = 3
@@ -2802,7 +2802,6 @@ night_start = SubResource("Resource_aoqbf")
 time_system = NodePath("../TimeSystem")
 
 [node name="Goblin" parent="." instance=ExtResource("14_c565e")]
-position = Vector2(60, 200)
 
 [node name="Goblin2" parent="." instance=ExtResource("14_c565e")]
 
@@ -2811,12 +2810,12 @@ script = ExtResource("16_jxchy")
 
 [node name="SpawnPoints" type="Node2D" parent="EnemySpawner"]
 
+[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
+position = Vector2(0, 200)
+
 [node name="SpawnPoint2" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
 position = Vector2(600, 0)
 gizmo_extents = 0.0
-
-[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
-position = Vector2(0, 200)
 
 [node name="Spawnpoint3" type="Marker2D" parent="EnemySpawner/SpawnPoints"]
 position = Vector2(400, 0)
@@ -2829,7 +2828,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(0, 15)
+position = Vector2(-6, -2)
 navigation_polygon = SubResource("NavigationPolygon_c565e")
 
 [node name="Portal" type="Node" parent="."]
@@ -2869,20 +2868,17 @@ texture = ExtResource("32_eyte7")
 position = Vector2(1253, 279)
 texture = ExtResource("33_kymrb")
 
-[node name="NPC" parent="." instance=ExtResource("34_eyte7")]
-position = Vector2(2053, 312)
+[node name="chest" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(2323, 92)
 
-[node name="NPC2" parent="." instance=ExtResource("34_eyte7")]
-position = Vector2(1370, 24)
+[node name="chest2" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(1319, 385)
 
-[node name="NPC3" parent="." instance=ExtResource("34_eyte7")]
-position = Vector2(1984, 9)
+[node name="chest3" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(1025, 580)
 
-[node name="NPC4" parent="." instance=ExtResource("34_eyte7")]
-position = Vector2(2259, -37)
-
-[node name="NPC5" parent="." instance=ExtResource("34_eyte7")]
-position = Vector2(2161, 232)
+[node name="chest4" parent="." instance=ExtResource("34_eyte7")]
+position = Vector2(1813, -16)
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/timeGui" method="_on_time_system_updated"]
 [connection signal="updated" from="TimeSystem" to="DirectionalLight2D" method="update"]
@@ -2890,7 +2886,6 @@ position = Vector2(2161, 232)
 [connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]
 [connection signal="pressed" from="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer/Host" to="." method="host"]
 [connection signal="pressed" from="CanvasLayer/multiplayerHUD/PanelContainer/VBoxContainer/Join" to="." method="join"]
-[connection signal="respawn_requested" from="CanvasLayer/GameOverScreen" to="." method="_on_respawn_requested"]
 [connection signal="pressed" from="CanvasLayer/EscMenu/MenuPanel/VBoxContainer/ContinueButton" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="CanvasLayer/EscMenu/MenuPanel/VBoxContainer/SaveAndExitButton" to="." method="_on_save_and_exit_pressed"]
 [connection signal="timeout" from="EnemySpawner/Timer2" to="EnemySpawner" method="_on_timer_2_timeout"]

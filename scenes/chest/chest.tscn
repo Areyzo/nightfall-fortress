@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://cufd3m0el2idc"]
+
+[ext_resource type="Script" uid="uid://2rta4uyqm07s" path="res://scenes/chest/chest.gd" id="1_3se45"]
+[ext_resource type="Script" uid="uid://bt3vadhhfjdlm" path="res://scripts/inventory/inventoryitem.gd" id="2_8qlbc"]
+[ext_resource type="Resource" uid="uid://cseqfgr6odgw1" path="res://scripts/inventory/items/stone.tres" id="3_bw3f2"]
+[ext_resource type="Resource" uid="uid://cvuoxo5r3ayig" path="res://scripts/inventory/items/arrow.tres" id="4_nlyrn"]
+[ext_resource type="Texture2D" uid="uid://d3b0t47wn0xlo" path="res://assets/game/Objects/treasure-chest.png" id="8_xcaki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11bfg"]
+size = Vector2(31, 34)
+
+[sub_resource type="Animation" id="Animation_1n4xr"]
+resource_name = "open"
+length = 0.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_xcaki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uigkj"]
+_data = {
+&"RESET": SubResource("Animation_xcaki"),
+&"open": SubResource("Animation_1n4xr")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcaki"]
+size = Vector2(41, 52)
+
+[node name="chest" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_3se45")
+forest_chest = ExtResource("8_xcaki")
+loot = Array[ExtResource("2_8qlbc")]([ExtResource("4_nlyrn"), ExtResource("3_bw3f2")])
+loot_quantities = Array[int]([5, 5])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, -3.13207)
+scale = Vector2(0.727273, 0.808373)
+texture = ExtResource("8_xcaki")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 1)
+shape = SubResource("RectangleShape2D_11bfg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uigkj")
+}
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_xcaki")
+
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]

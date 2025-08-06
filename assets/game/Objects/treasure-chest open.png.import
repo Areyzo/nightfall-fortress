@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxfnpm1e1bc88"
-path="res://.godot/imported/log.png-71d06dd878d58773c1990ba9c1016b17.ctex"
+uid="uid://cef64brct8tjr"
+path="res://.godot/imported/treasure-chest open.png-fff1daa1d1c47c68de3353adc941daab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game/Objects/log.png"
-dest_files=["res://.godot/imported/log.png-71d06dd878d58773c1990ba9c1016b17.ctex"]
+source_file="res://assets/game/Objects/treasure-chest open.png"
+dest_files=["res://.godot/imported/treasure-chest open.png-fff1daa1d1c47c68de3353adc941daab.ctex"]
 
 [params]
 
@@ -30,9 +30,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-<<<<<<< HEAD
-process/size_limit=32
-=======
 process/size_limit=0
->>>>>>> 91d9983a9b1d98a95647f795180d428c53edf985
 detect_3d/compress_to=1

@@ -142,16 +142,30 @@ func update_health_bar():
 func die():
 	print("=== PLAYER DIE FUNCTION CALLED ===")
 	print("Current health: ", current_health)
+	print("Current scene: ", get_tree().current_scene.scene_file_path)
 	print("About to emit player_died signal...")
-	player_died.emit()
-	print("player_died signal emitted!")
-	# Add death animation/effect here
-	# For now, just disable the player
-	set_physics_process(false)
-	print("Physics process disabled")
+	
+	# Check if player is in cave/mines scene
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	var is_in_cave = current_scene_path.contains("Mines") or current_scene_path.contains("cave")
+	
+	if is_in_cave:
+		print("Player died in cave - will respawn in main world")
+		# Store death in cave flag for cross-scene respawn
+		GlobalData.died_in_cave = true
+		GlobalData.respawn_in_main_world = true
+		# Change to main world scene
+		get_tree().change_scene_to_file("res://scenes/test/testscenes_tilemap.tscn")
+	else:
+		print("Player died in main world - normal game over screen")
+		player_died.emit()
+		print("player_died signal emitted!")
+		# Add death animation/effect here
+		# For now, just disable the player
+		set_physics_process(false)
+		print("Physics process disabled")
+	
 	print("Player die() function complete")
-	# You might want to transition to game over scene instead
-	# get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
 
 func respawn(spawn_position: Vector2 = Vector2.ZERO):
 	"""Respawn the player at given position with full health"""

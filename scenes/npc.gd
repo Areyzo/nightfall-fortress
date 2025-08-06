@@ -34,6 +34,21 @@ var dialogue_sets = {
 		"Hello there, brave soul!",
 		"I can see the determination in your eyes.",
 		"Remember, courage is your greatest weapon!"
+	],
+	"FemaleNPC": [
+		"Oh, hello there! Such a lovely day, isn't it?",
+		"I've been tending to the village gardens all morning.",
+		"The flowers bloom beautifully when shown kindness!"
+	],
+	"FemaleNPC2": [
+		"Welcome, dear traveler! You look weary from your journey.",
+		"I run the village inn - we have the finest bread in the land!",
+		"Rest well tonight, tomorrow brings new adventures!"
+	],
+	"FemaleNPC3": [
+		"Greetings! I sense great potential within you.",
+		"I study the ancient arts of magic and healing.",
+		"May wisdom guide your path, young adventurer!"
 	]
 }
 

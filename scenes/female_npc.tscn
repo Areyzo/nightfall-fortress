@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4m6spx3ttin6"]
+
+[ext_resource type="Script" uid="uid://bj5lqd452do0f" path="res://scenes/npc.gd" id="1_abqhh"]
+[ext_resource type="Texture2D" uid="uid://dwde2r1tq7843" path="res://assets/game/Characters/Blue/Pawn_Blue.png" id="2_female"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_collision"]
+radius = 7.07107
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_chat"]
+radius = 40.0
+
+[node name="FemaleNPC" type="CharacterBody2D"]
+scale = Vector2(0.851284, 0.836691)
+script = ExtResource("1_abqhh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.999996, 3.8147e-06)
+scale = Vector2(1.8475, 1.68)
+texture = ExtResource("2_female")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(80, -6)
+shape = SubResource("CircleShape2D_collision")
+
+[node name="chat" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chat"]
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_chat")

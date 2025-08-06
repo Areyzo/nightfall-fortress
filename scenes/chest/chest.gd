@@ -68,11 +68,11 @@ func spawn_items() -> void:
 
 
 func _on_interact_area_body_entered(body: Node2D) -> void:
-	if body is Player and not is_opened:
+	if body.is_in_group("player") and not is_opened:
 		can_interact = true
 
 func _on_interact_area_body_exited(body: Node2D) -> void:
-	if body is Player:
+	if body.is_in_group("player"):
 		can_interact = false
 
 #func _ready():
